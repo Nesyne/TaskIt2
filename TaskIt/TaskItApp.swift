@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct TaskItApp: App {
+    @StateObject private var TopCor = ControlData()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TaskItView()
+                .environment(\.managedObjectContext, TopCor.obj.viewContext)
         }
     }
 }
