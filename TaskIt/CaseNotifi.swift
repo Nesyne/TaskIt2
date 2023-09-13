@@ -16,8 +16,7 @@ class CaseNotifi {
     func run(){
         dateFormatter.dateFormat = "HH:mm"
         dateInFormat = dateFormatter.string(from: todaysDate)
-        var noti = Notifi()
-        var run = 0
+       
         ForEach(CoreArr){ hello in
             if(hello.done == false){
                 if(hello.cais == 1){
