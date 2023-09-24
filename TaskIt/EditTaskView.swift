@@ -24,7 +24,7 @@ struct EditTaskView: View {
                     ForEach(CoreArr){ hello in
                         if (hello.cais == 1) {
                             NavigationLink{
-                                TaskView(tittle: (hello.title ?? "Error Loading"), bod: (hello.body ?? "Error Loading"), type: Int((hello.cais)), done: (hello.done))
+                                TaskView(item: hello)
                             }label: {
                                 Text(hello.title ?? "Error Loading").overlay {
                                     Rectangle()
@@ -45,8 +45,7 @@ struct EditTaskView: View {
                     ForEach(CoreArr){ hello in
                         if (hello.cais == 2) {
                             NavigationLink{
-                                TaskView(tittle: (hello.title ?? "Error Loading"), bod: (hello.body ?? "Error Loading"), type: Int((hello.cais)), done: (hello.done))
-                            }label: {
+                                TaskView(item: hello)                            }label: {
                                 Text(hello.title ?? "Error Loading").overlay {
                                     Rectangle()
                                         .rotation(.degrees(-90))
@@ -67,8 +66,7 @@ struct EditTaskView: View {
                     ForEach(CoreArr){ hello in
                         if (hello.cais == 3) {
                             NavigationLink{
-                                TaskView(tittle: (hello.title ?? "Error Loading"), bod: (hello.body ?? "Error Loading"), type: Int((hello.cais)), done: (hello.done))
-                            }label: {
+                                TaskView(item: hello)                            }label: {
                                 Text(hello.title ?? "Error Loading").overlay {
                                     Rectangle()
                                         .rotation(.degrees(-90))
@@ -88,8 +86,7 @@ struct EditTaskView: View {
                     ForEach(CoreArr){ hello in
                         if (hello.cais == 4) {
                             NavigationLink{
-                                TaskView(tittle: (hello.title ?? "Error Loading"), bod: (hello.body ?? "Error Loading"), type: Int((hello.cais)), done: (hello.done))
-                            }label: {
+                                TaskView(item: hello)                            }label: {
                                 Text(hello.title ?? "Error Loading").overlay {
                                     Rectangle()
                                         .rotation(.degrees(-90))
