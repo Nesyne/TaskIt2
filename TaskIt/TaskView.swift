@@ -24,35 +24,72 @@ struct TaskView: View  {
    
    @State var item : Task
  
+   @State var editting = false
     
    @State var color = Color.green
     var body: some View {
+        
+        
         Form{
             Section{
-                Text(tittle).overlay {
-                    Rectangle()
-                        .rotation(.degrees(-90))
-                        .foregroundColor(color)
-                        .position(x: -16,y: 5)
-                    Rectangle()
-                        .rotation(.degrees(-90))
-                        .foregroundColor(color)
-                        .position(x: -16,y: 13)
-                }
-                .onAppear(){
-                    typeF()
+                if editting {
+               TextField("Tittle", text: $tittle)
+                        .overlay {
+                            Rectangle()
+                                .rotation(.degrees(-90))
+                                .foregroundColor(color)
+                                .position(x: -16,y: 5)
+                            Rectangle()
+                                .rotation(.degrees(-90))
+                                .foregroundColor(color)
+                                .position(x: -16,y: 13)
+                        }
+                        .onAppear(){
+                            typeF()
+                        }
+                    
+                    TextField("Notes", text: $bod)
+                        .overlay {
+                        Rectangle()
+                            .rotation(.degrees(-90))
+                            .foregroundColor(color)
+                            .position(x: -16,y: 5)
+                        Rectangle()
+                            .rotation(.degrees(-90))
+                            .foregroundColor(color)
+                            .position(x: -16,y: 13)
+                    }
+                    
+                    }
+                    else{
+                        Text(tittle).overlay {
+                            Rectangle()
+                                .rotation(.degrees(-90))
+                                .foregroundColor(color)
+                                .position(x: -16,y: 5)
+                            Rectangle()
+                                .rotation(.degrees(-90))
+                                .foregroundColor(color)
+                                .position(x: -16,y: 13)
+                        }
+                        .onAppear(){
+                            typeF()
+                    }
+               
+                        Text(bod).overlay {
+                            Rectangle()
+                                .rotation(.degrees(-90))
+                                .foregroundColor(color)
+                                .position(x: -16,y: 5)
+                            Rectangle()
+                                .rotation(.degrees(-90))
+                                .foregroundColor(color)
+                                .position(x: -16,y: 13)
+                        }
+
+                        
                 }
                 
-                Text(bod).overlay {
-                    Rectangle()
-                        .rotation(.degrees(-90))
-                        .foregroundColor(color)
-                        .position(x: -16,y: 5)
-                    Rectangle()
-                        .rotation(.degrees(-90))
-                        .foregroundColor(color)
-                        .position(x: -16,y: 13)
-                }
             }
             Section{
                 HStack{
@@ -72,6 +109,28 @@ struct TaskView: View  {
                 }
                 
             }
+        .toolbar{
+           
+            ToolbarItem(placement: .navigationBarTrailing){
+                Button(){
+                    editting.toggle()
+                    item.title = tittle
+                    item.body = bod
+                    try? top.save()
+                } label: {
+                    if editting {
+                        Text("Done")
+                    }
+                    else{
+                        Image(systemName: "rectangle.and.pencil.and.ellipsis")
+                    }
+                }
+            }
+            
+            
+        }
+        
+        
         }
     
     func typeF(){
