@@ -26,7 +26,7 @@ struct TaskItView: View {
             VStack {
                 VStack{
                     DatePicker("Start of you day", selection: $date, displayedComponents: .date)
-                        .datePickerStyle(GraphicalDatePickerStyle())
+                        .datePickerStyle(GraphicalDatePickerStyle()) //Todo: Look for a vertically oriented style of the graphical calender
                         .frame(maxHeight: 400)
                         .onAppear(){
                             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]){ success, error in
@@ -41,8 +41,15 @@ struct TaskItView: View {
                         }
                     
                 }
-             
+             //Todo: wrap this into an if statement for when to show or not based on whether there are calendar events
                 MultyTaskView(dat: $date) 
+                
+            // Optionally: based on the date; get the task and it's type(daily, weekly etc)
+                //Maybe make a listview view here and display the name of the task on the left(and maybe descriptions underneath) and then to right, display the type
+                
+            // When you swipe the record on the list(task) to the left, you can select Edit to go to edit window,or select complete to mark it complete or you can delete the task.
+                
+                //Clicking the task takes you to the Task Details view. Here you can mark the task as complete or delete. On the top right of this view, should be an Edit button. When clicked, it will open another Edit view.
                 
             }
             .padding()
