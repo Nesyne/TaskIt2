@@ -41,8 +41,95 @@ struct TaskItView: View {
                         }
                     
                 }
-             //Todo: wrap this into an if statement for when to show or not based on whether there are calendar events
-                MultyTaskView(dat: $date) 
+            
+                VStack{
+                  Form{
+                            Section("Daily Reminders"){
+                                ForEach(CoreArr){ hello in
+                                    if (hello.cais == 1 && hello.start ?? Date()  < date) {
+                                        NavigationLink{
+                                            TaskView(item: hello)                            }label: {
+                                            Text(hello.title ?? "Error Loading").overlay {
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 5)
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 13)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            Section("Weekly Reminders"){
+                                ForEach(CoreArr){ hello in
+                                    if (hello.cais == 2 && hello.start ?? Date()  < date) {
+                                        NavigationLink{
+                                            TaskView(item: hello)                            }label: {
+                                            Text(hello.title ?? "Error Loading").overlay {
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 5)
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 13)
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            }
+                            Section("Monthly Reminders"){
+                                ForEach(CoreArr){ hello in
+                                    if (hello.cais == 3 && hello.start ?? Date()  < date) {
+                                        NavigationLink{
+                                            TaskView(item: hello)                            }label: {
+                                            Text(hello.title ?? "Error Loading").overlay {
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 5)
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 13)
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            }
+                            Section("Yearly Reminders"){
+                                ForEach(CoreArr){ hello in
+                                    if (hello.cais == 4 && hello.start ?? Date()  < date) {
+                                        NavigationLink{
+                                            TaskView(item: hello)                            }label: {
+                                            Text(hello.title ?? "Error Loading").overlay {
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 5)
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 13)
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            }
+                            
+                        }
+                
+                    //MultyTaskView(dat: $date)
+                }
+                
+                //Todo: wrap this into an if statement for when to show or not based on whether there are calendar events
                 
             // Optionally: based on the date; get the task and it's type(daily, weekly etc)
                 //Maybe make a listview view here and display the name of the task on the left(and maybe descriptions underneath) and then to right, display the type
