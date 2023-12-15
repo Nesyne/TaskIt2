@@ -30,6 +30,7 @@ struct AddTask: View {
                             Text(ty(One: $0))
                         }
                     }
+                    .tint(.blue)
                 }
                 Button("Add Task"){
                     if(tittle1 != ""){
