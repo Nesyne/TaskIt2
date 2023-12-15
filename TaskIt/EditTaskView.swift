@@ -19,7 +19,7 @@ struct EditTaskView: View {
     var body: some View {
         NavigationView{
             Form{
-                Text("Swipe to delete tasks")
+                Text("All Tasks")
                 Section("Daily Reminders"){
                     ForEach(CoreArr){ hello in
                         if (hello.cais == 1) {

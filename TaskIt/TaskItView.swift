@@ -46,7 +46,7 @@ struct TaskItView: View {
                   Form{
                             Section("Daily Reminders"){
                                 ForEach(CoreArr){ hello in
-                                    if (hello.cais == 1 && hello.start ?? Date()  < date) {
+                                    if (hello.cais == 1 && hello.start ?? Date() < date) {
                                         NavigationLink{
                                             TaskView(item: hello)                            }label: {
                                             Text(hello.title ?? "Error Loading").overlay {
@@ -60,8 +60,32 @@ struct TaskItView: View {
                                                     .position(x: -16,y: 13)
                                             }
                                         }
+                                            .swipeActions(){
+                                                Button(role: .destructive){
+                                                    top.delete(hello)
+                                                    try? top.save()
+                                                } label: {
+                                                 Image(systemName: "trash")
+                                                }
+                                                Button(){
+                                                    
+                                                }label:{
+                                                Label("Finish", systemImage: "checkmark")
+                                                }
+                                                .tint(.green)
+                                                
+                                                Button(){
+                                                    
+                                                }label:{
+                                                Label("Edit", systemImage: "pencil.circle.fill")
+                                                }
+                                                .tint(.orange)
+                                            }
                                     }
                                 }
+                                
+                                
+                                
                             }
                             Section("Weekly Reminders"){
                                 ForEach(CoreArr){ hello in
@@ -79,6 +103,27 @@ struct TaskItView: View {
                                                     .position(x: -16,y: 13)
                                             }
                                         }
+                                            .swipeActions(){
+                                                Button(role: .destructive){
+                                                    top.delete(hello)
+                                                    try? top.save()
+                                                } label: {
+                                                 Image(systemName: "trash")
+                                                }
+                                                Button(){
+                                                    
+                                                }label:{
+                                                Label("Finish", systemImage: "checkmark")
+                                                }
+                                                .tint(.green)
+                                                
+                                                Button(){
+                                                    
+                                                }label:{
+                                                Label("Edit", systemImage: "pencil.circle.fill")
+                                                }
+                                                .tint(.orange)
+                                            }
                                     }
                                 }
                                 
@@ -99,6 +144,27 @@ struct TaskItView: View {
                                                     .position(x: -16,y: 13)
                                             }
                                         }
+                                            .swipeActions(){
+                                                Button(role: .destructive){
+                                                    top.delete(hello)
+                                                    try? top.save()
+                                                } label: {
+                                                 Image(systemName: "trash")
+                                                }
+                                                Button(){
+                                                    
+                                                }label:{
+                                                Label("Finish", systemImage: "checkmark")
+                                                }
+                                                .tint(.green)
+                                                
+                                                Button(){
+                                                    
+                                                }label:{
+                                                Label("Edit", systemImage: "pencil.circle.fill")
+                                                }
+                                                .tint(.orange)
+                                            }
                                     }
                                 }
                                 
@@ -119,14 +185,33 @@ struct TaskItView: View {
                                                     .position(x: -16,y: 13)
                                             }
                                         }
+                                            .swipeActions(){
+                                                Button(role: .destructive){
+                                                    top.delete(hello)
+                                                    try? top.save()
+                                                } label: {
+                                                 Image(systemName: "trash")
+                                                }
+                                                Button(){
+                                                    
+                                                }label:{
+                                                Label("Finish", systemImage: "checkmark")
+                                                }
+                                                .tint(.green)
+                                                
+                                                Button(){
+                                                    
+                                                }label:{
+                                                Label("Edit", systemImage: "pencil.circle.fill")
+                                                }
+                                                .tint(.orange)
+                                            }
                                     }
                                 }
                                 
                             }
                             
                         }
-                
-                    //MultyTaskView(dat: $date)
                 }
                 
                 //Todo: wrap this into an if statement for when to show or not based on whether there are calendar events
@@ -157,8 +242,8 @@ struct TaskItView: View {
                         
                     } label: {
                         HStack{
-                            Image(systemName: "pencil").bold()
-                            Text("Edit Tasks")
+                            Image(systemName: "list.dash").bold()
+                            Text("All Tasks")
                         }
                         }
                     
