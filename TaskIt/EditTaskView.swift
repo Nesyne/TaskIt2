@@ -24,8 +24,7 @@ struct EditTaskView: View {
                     ForEach(CoreArr){ hello in
                         if (hello.cais == 1) {
                             NavigationLink{
-                                TaskView(item: hello)
-                            }label: {
+                                TaskView(item: hello)                            }label: {
                                 Text(hello.title ?? "Error Loading").overlay {
                                     Rectangle()
                                         .rotation(.degrees(-90))
@@ -37,9 +36,40 @@ struct EditTaskView: View {
                                         .position(x: -16,y: 13)
                                 }
                             }
+                                .swipeActions(){
+                                    Button(role: .destructive){
+                                        top.delete(hello)
+                                        try? top.save()
+                                    } label: {
+                                     Image(systemName: "trash")
+                                    }
+                                    Button(){
+                                        hello.done.toggle()
+                                        try? top.save()
+                                    }label:{
+                                        
+                                        if hello.done == false {
+                                            Label("Finish", systemImage: "checkmark")
+                                        }
+                                        else {
+                                            Label("Un-Finish", systemImage: "multiply")
+                                        }
+                                        
+                                    }
+                                    .tint(.green)
+                                    
+                                    Button(){
+                                        
+                                    }label:{
+                                    Label("Edit", systemImage: "pencil.circle.fill")
+                                    }
+                                    .tint(.orange)
+                                }
                         }
                     }
-                    .onDelete(perform: dellt)
+                    
+                    
+                    
                 }
                 Section("Weekly Reminders"){
                     ForEach(CoreArr){ hello in
@@ -57,9 +87,37 @@ struct EditTaskView: View {
                                         .position(x: -16,y: 13)
                                 }
                             }
+                                .swipeActions(){
+                                    Button(role: .destructive){
+                                        top.delete(hello)
+                                        try? top.save()
+                                    } label: {
+                                     Image(systemName: "trash")
+                                    }
+                                    Button(){
+                                        hello.done.toggle()
+                                        try? top.save()
+                                    }label:{
+                                        
+                                        if hello.done == false {
+                                            Label("Finish", systemImage: "checkmark")
+                                        }
+                                        else {
+                                            Label("Un-Finish", systemImage: "multiply")
+                                        }
+                                        
+                                    }
+                                    .tint(.green)
+                                    
+                                    Button(){
+                                        
+                                    }label:{
+                                    Label("Edit", systemImage: "pencil.circle.fill")
+                                    }
+                                    .tint(.orange)
+                                }
                         }
                     }
-                    .onDelete(perform: dellt)
                     
                 }
                 Section("Monthly Reminders"){
@@ -78,8 +136,37 @@ struct EditTaskView: View {
                                         .position(x: -16,y: 13)
                                 }
                             }
+                                .swipeActions(){
+                                    Button(role: .destructive){
+                                        top.delete(hello)
+                                        try? top.save()
+                                    } label: {
+                                     Image(systemName: "trash")
+                                    }
+                                    Button(){
+                                        hello.done.toggle()
+                                        try? top.save()
+                                    }label:{
+                                        
+                                        if hello.done == false {
+                                            Label("Finish", systemImage: "checkmark")
+                                        }
+                                        else {
+                                            Label("Un-Finish", systemImage: "multiply")
+                                        }
+                                        
+                                    }
+                                    .tint(.green)
+                                    
+                                    Button(){
+                                        
+                                    }label:{
+                                    Label("Edit", systemImage: "pencil.circle.fill")
+                                    }
+                                    .tint(.orange)
+                                }
                         }
-                    }.onDelete(perform: dellt)
+                    }
                     
                 }
                 Section("Yearly Reminders"){
@@ -98,8 +185,37 @@ struct EditTaskView: View {
                                         .position(x: -16,y: 13)
                                 }
                             }
+                                .swipeActions(){
+                                    Button(role: .destructive){
+                                        top.delete(hello)
+                                        try? top.save()
+                                    } label: {
+                                     Image(systemName: "trash")
+                                    }
+                                    Button(){
+                                        hello.done.toggle()
+                                        try? top.save()
+                                    }label:{
+                                        
+                                        if hello.done == false {
+                                            Label("Finish", systemImage: "checkmark")
+                                        }
+                                        else {
+                                            Label("Un-Finish", systemImage: "multiply")
+                                        }
+                                        
+                                    }
+                                    .tint(.green)
+                                    
+                                    Button(){
+                                        
+                                    }label:{
+                                    Label("Edit", systemImage: "pencil.circle.fill")
+                                    }
+                                    .tint(.orange)
+                                }
                         }
-                    }.onDelete(perform: dellt)
+                    }
                     
                 }
                 

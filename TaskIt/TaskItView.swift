@@ -71,7 +71,14 @@ struct TaskItView: View {
                                                     hello.done.toggle()
                                                     try? top.save()
                                                 }label:{
-                                                Label("Finish", systemImage: "checkmark")
+                                                    
+                                                    if hello.done == false {
+                                                        Label("Finish", systemImage: "checkmark")
+                                                    }
+                                                    else {
+                                                        Label("Un-Finish", systemImage: "multiply")
+                                                    }
+                                                    
                                                 }
                                                 .tint(.green)
                                                 
@@ -112,9 +119,17 @@ struct TaskItView: View {
                                                  Image(systemName: "trash")
                                                 }
                                                 Button(){
-                                                    
+                                                    hello.done.toggle()
+                                                    try? top.save()
                                                 }label:{
-                                                Label("Finish", systemImage: "checkmark")
+                                                    
+                                                    if hello.done == false {
+                                                        Label("Finish", systemImage: "checkmark")
+                                                    }
+                                                    else {
+                                                        Label("Un-Finish", systemImage: "multiply")
+                                                    }
+                                                    
                                                 }
                                                 .tint(.green)
                                                 
@@ -153,9 +168,17 @@ struct TaskItView: View {
                                                  Image(systemName: "trash")
                                                 }
                                                 Button(){
-                                                    
+                                                    hello.done.toggle()
+                                                    try? top.save()
                                                 }label:{
-                                                Label("Finish", systemImage: "checkmark")
+                                                    
+                                                    if hello.done == false {
+                                                        Label("Finish", systemImage: "checkmark")
+                                                    }
+                                                    else {
+                                                        Label("Un-Finish", systemImage: "multiply")
+                                                    }
+                                                    
                                                 }
                                                 .tint(.green)
                                                 
@@ -194,9 +217,17 @@ struct TaskItView: View {
                                                  Image(systemName: "trash")
                                                 }
                                                 Button(){
-                                                    
+                                                    hello.done.toggle()
+                                                    try? top.save()
                                                 }label:{
-                                                Label("Finish", systemImage: "checkmark")
+                                                    
+                                                    if hello.done == false {
+                                                        Label("Finish", systemImage: "checkmark")
+                                                    }
+                                                    else {
+                                                        Label("Un-Finish", systemImage: "multiply")
+                                                    }
+                                                    
                                                 }
                                                 .tint(.green)
                                                 
