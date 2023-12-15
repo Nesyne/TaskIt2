@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+// AllTaskView
 struct EditTaskView: View {
     @AppStorage("ColorD") var ColorD: Color = .green
     @AppStorage("ColorW") var ColorW: Color = .red

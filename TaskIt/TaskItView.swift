@@ -68,7 +68,8 @@ struct TaskItView: View {
                                                  Image(systemName: "trash")
                                                 }
                                                 Button(){
-                                                    
+                                                    hello.done.toggle()
+                                                    try? top.save()
                                                 }label:{
                                                 Label("Finish", systemImage: "checkmark")
                                                 }

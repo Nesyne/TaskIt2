@@ -22,7 +22,7 @@ struct AddTask: View {
             ScrollView{
                 TextField("Task", text: $tittle1).padding()
                 TextField("Description", text: $bodie1).padding()
-                DatePicker("Start Date", selection: $Start, displayedComponents: .date).padding()
+                DatePicker("Start Date", selection: $Start, displayedComponents: [.date, .hourAndMinute]).padding()
                 HStack{
                     Text("Choose a reminder type")
                     Picker("Choose a reminder type", selection: $rtype){
