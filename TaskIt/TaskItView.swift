@@ -44,9 +44,9 @@ struct TaskItView: View {
             
                 VStack{
                   Form{
-                            Section("Daily Reminders"){
+                            Section("Todays Tasks"){
                                 ForEach(CoreArr){ hello in
-                                    if (hello.cais == 1 && hello.start ?? Date() < date) {
+                                    if (hello.start ?? Date() < date) {
                                         NavigationLink{
                                             TaskView(item: hello)                            }label: {
                                             Text(hello.title ?? "Error Loading").overlay {
@@ -60,13 +60,22 @@ struct TaskItView: View {
                                                     .position(x: -16,y: 13)
                                             }
                                         }
-                                            .swipeActions(){
+                                            .swipeActions(edge: .trailing){
                                                 Button(role: .destructive){
                                                     top.delete(hello)
                                                     try? top.save()
                                                 } label: {
                                                  Image(systemName: "trash")
                                                 }
+                                                
+                                                Button(){
+                                                    
+                                                }label:{
+                                                Label("Edit", systemImage: "pencil.circle.fill")
+                                                }
+                                                .tint(.orange)
+                                            }
+                                            .swipeActions(edge: .leading){
                                                 Button(){
                                                     hello.done.toggle()
                                                     try? top.save()
@@ -81,13 +90,7 @@ struct TaskItView: View {
                                                     
                                                 }
                                                 .tint(.green)
-                                                
-                                                Button(){
-                                                    
-                                                }label:{
-                                                Label("Edit", systemImage: "pencil.circle.fill")
-                                                }
-                                                .tint(.orange)
+
                                             }
                                     }
                                 }
@@ -95,153 +98,7 @@ struct TaskItView: View {
                                 
                                 
                             }
-                            Section("Weekly Reminders"){
-                                ForEach(CoreArr){ hello in
-                                    if (hello.cais == 2 && hello.start ?? Date()  < date) {
-                                        NavigationLink{
-                                            TaskView(item: hello)                            }label: {
-                                            Text(hello.title ?? "Error Loading").overlay {
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 5)
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 13)
-                                            }
-                                        }
-                                            .swipeActions(){
-                                                Button(role: .destructive){
-                                                    top.delete(hello)
-                                                    try? top.save()
-                                                } label: {
-                                                 Image(systemName: "trash")
-                                                }
-                                                Button(){
-                                                    hello.done.toggle()
-                                                    try? top.save()
-                                                }label:{
-                                                    
-                                                    if hello.done == false {
-                                                        Label("Finish", systemImage: "checkmark")
-                                                    }
-                                                    else {
-                                                        Label("Un-Finish", systemImage: "multiply")
-                                                    }
-                                                    
-                                                }
-                                                .tint(.green)
-                                                
-                                                Button(){
-                                                    
-                                                }label:{
-                                                Label("Edit", systemImage: "pencil.circle.fill")
-                                                }
-                                                .tint(.orange)
-                                            }
-                                    }
-                                }
-                                
-                            }
-                            Section("Monthly Reminders"){
-                                ForEach(CoreArr){ hello in
-                                    if (hello.cais == 3 && hello.start ?? Date()  < date) {
-                                        NavigationLink{
-                                            TaskView(item: hello)                            }label: {
-                                            Text(hello.title ?? "Error Loading").overlay {
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 5)
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 13)
-                                            }
-                                        }
-                                            .swipeActions(){
-                                                Button(role: .destructive){
-                                                    top.delete(hello)
-                                                    try? top.save()
-                                                } label: {
-                                                 Image(systemName: "trash")
-                                                }
-                                                Button(){
-                                                    hello.done.toggle()
-                                                    try? top.save()
-                                                }label:{
-                                                    
-                                                    if hello.done == false {
-                                                        Label("Finish", systemImage: "checkmark")
-                                                    }
-                                                    else {
-                                                        Label("Un-Finish", systemImage: "multiply")
-                                                    }
-                                                    
-                                                }
-                                                .tint(.green)
-                                                
-                                                Button(){
-                                                    
-                                                }label:{
-                                                Label("Edit", systemImage: "pencil.circle.fill")
-                                                }
-                                                .tint(.orange)
-                                            }
-                                    }
-                                }
-                                
-                            }
-                            Section("Yearly Reminders"){
-                                ForEach(CoreArr){ hello in
-                                    if (hello.cais == 4 && hello.start ?? Date()  < date) {
-                                        NavigationLink{
-                                            TaskView(item: hello)                            }label: {
-                                            Text(hello.title ?? "Error Loading").overlay {
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 5)
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 13)
-                                            }
-                                        }
-                                            .swipeActions(){
-                                                Button(role: .destructive){
-                                                    top.delete(hello)
-                                                    try? top.save()
-                                                } label: {
-                                                 Image(systemName: "trash")
-                                                }
-                                                Button(){
-                                                    hello.done.toggle()
-                                                    try? top.save()
-                                                }label:{
-                                                    
-                                                    if hello.done == false {
-                                                        Label("Finish", systemImage: "checkmark")
-                                                    }
-                                                    else {
-                                                        Label("Un-Finish", systemImage: "multiply")
-                                                    }
-                                                    
-                                                }
-                                                .tint(.green)
-                                                
-                                                Button(){
-                                                    
-                                                }label:{
-                                                Label("Edit", systemImage: "pencil.circle.fill")
-                                                }
-                                                .tint(.orange)
-                                            }
-                                    }
-                                }
-                                
-                            }
+
                             
                         }
                 }
