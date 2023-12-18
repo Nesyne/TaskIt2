@@ -82,7 +82,7 @@ struct TaskItView: View {
                                                             }
                                                         Text(ty(One: Int(hello.cais)))
                                                             .font(.system(size: 10))
-                                                            .foregroundColor(.gray)
+                                                            .foregroundColor(Colors(Num: Int((hello.cais))))
                                                     }
                                                 }
 
