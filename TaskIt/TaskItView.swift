@@ -49,16 +49,45 @@ struct TaskItView: View {
                                     if (hello.start ?? Date() < date) {
                                         NavigationLink{
                                             TaskView(item: hello)                            }label: {
-                                            Text(hello.title ?? "Error Loading").overlay {
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 5)
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 13)
-                                            }
+                                                VStack{
+                                                    
+                                                    Text(hello.title ?? "Error Loading")
+                                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                                        .font(.system(size: 15))
+                                                        .overlay {
+                                                            Rectangle()
+                                                                .rotation(.degrees(-90))
+                                                                .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                                .position(x: -16,y: 5)
+                                                            Rectangle()
+                                                                .rotation(.degrees(-90))
+                                                                .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                                .position(x: -16,y: 13)
+                                                        }
+                                                        
+                                                    HStack{
+                                                        Text(hello.body ?? "Error Loading")
+                                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                                            .font(.system(size: 10))
+                                                            .foregroundColor(.gray)
+                                                            .overlay {
+                                                                Rectangle()
+                                                                    .rotation(.degrees(-90))
+                                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                                    .position(x: -16,y: 5)
+                                                                Rectangle()
+                                                                    .rotation(.degrees(-90))
+                                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                                    .position(x: -16,y: 13)
+                                                            }
+                                                        Text(ty(One: Int(hello.cais)))
+                                                            .font(.system(size: 10))
+                                                            .foregroundColor(.gray)
+                                                    }
+                                                }
+
+                                                
+                                                
                                         }
                                             .swipeActions(edge: .trailing){
                                                 Button(role: .destructive){
@@ -153,6 +182,26 @@ struct TaskItView: View {
         }
     }
  
+    func ty(One: Int) -> String{
+        var hi = ""
+        if (One == 1){
+         hi = "Dayly"
+        }
+        else if (One == 2){
+            hi = "Weekly"
+            
+        }
+        else if (One == 3){
+           hi = "Monthly"
+            
+        }
+        else if (One == 4){
+            hi = "Yearly"
+            
+        }
+    return hi
+    }
+    
     func Colors(Num: Int) -> Color{
         var col = Color.gray
         if (Num == 1){
