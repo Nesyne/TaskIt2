@@ -25,24 +25,56 @@ struct EditTaskView: View {
                         if (hello.cais == 1) {
                             NavigationLink{
                                 TaskView(item: hello)                            }label: {
-                                Text(hello.title ?? "Error Loading").overlay {
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 5)
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 13)
-                                }
+                                    VStack{
+                                        
+                                        Text(hello.title ?? "Error Loading")
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .font(.system(size: 15))
+                                            .overlay {
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 5)
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 13)
+                                            }
+                                            
+                                        
+                                            Text(hello.body ?? "Error Loading")
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .font(.system(size: 10))
+                                                .foregroundColor(.gray)
+                                                .overlay {
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 5)
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 13)
+                                                }
+                                        
+                                    }
                             }
-                                .swipeActions(){
+                                .swipeActions(edge: .trailing){
                                     Button(role: .destructive){
                                         top.delete(hello)
                                         try? top.save()
                                     } label: {
                                      Image(systemName: "trash")
                                     }
+                                    
+                                    Button(){
+                                        
+                                    }label:{
+                                    Label("Edit", systemImage: "pencil.circle.fill")
+                                    }
+                                    .tint(.orange)
+                                }
+                                .swipeActions(edge: .leading){
                                     Button(){
                                         hello.done.toggle()
                                         try? top.save()
@@ -57,13 +89,7 @@ struct EditTaskView: View {
                                         
                                     }
                                     .tint(.green)
-                                    
-                                    Button(){
-                                        
-                                    }label:{
-                                    Label("Edit", systemImage: "pencil.circle.fill")
-                                    }
-                                    .tint(.orange)
+
                                 }
                         }
                     }
@@ -76,24 +102,56 @@ struct EditTaskView: View {
                         if (hello.cais == 2) {
                             NavigationLink{
                                 TaskView(item: hello)                            }label: {
-                                Text(hello.title ?? "Error Loading").overlay {
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 5)
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 13)
-                                }
+                                    VStack{
+                                        
+                                        Text(hello.title ?? "Error Loading")
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .font(.system(size: 15))
+                                            .overlay {
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 5)
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 13)
+                                            }
+                                            
+                                        
+                                            Text(hello.body ?? "Error Loading")
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .font(.system(size: 10))
+                                                .foregroundColor(.gray)
+                                                .overlay {
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 5)
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 13)
+                                                }
+                                        
+                                    }
                             }
-                                .swipeActions(){
+                                .swipeActions(edge: .trailing){
                                     Button(role: .destructive){
                                         top.delete(hello)
                                         try? top.save()
                                     } label: {
                                      Image(systemName: "trash")
                                     }
+                                    
+                                    Button(){
+                                        
+                                    }label:{
+                                    Label("Edit", systemImage: "pencil.circle.fill")
+                                    }
+                                    .tint(.orange)
+                                }
+                                .swipeActions(edge: .leading){
                                     Button(){
                                         hello.done.toggle()
                                         try? top.save()
@@ -108,13 +166,7 @@ struct EditTaskView: View {
                                         
                                     }
                                     .tint(.green)
-                                    
-                                    Button(){
-                                        
-                                    }label:{
-                                    Label("Edit", systemImage: "pencil.circle.fill")
-                                    }
-                                    .tint(.orange)
+
                                 }
                         }
                     }
@@ -125,24 +177,57 @@ struct EditTaskView: View {
                         if (hello.cais == 3) {
                             NavigationLink{
                                 TaskView(item: hello)                            }label: {
-                                Text(hello.title ?? "Error Loading").overlay {
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 5)
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 13)
-                                }
+                                    VStack{
+                                        
+                                        Text(hello.title ?? "Error Loading")
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .font(.system(size: 15))
+                                            .overlay {
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 5)
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 13)
+                                            }
+                                            
+                                        
+                                            Text(hello.body ?? "Error Loading")
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .font(.system(size: 10))
+                                                .foregroundColor(.gray)
+                                                .overlay {
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 5)
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 13)
+                                                }
+                                        
+                                    }
+
                             }
-                                .swipeActions(){
+                                .swipeActions(edge: .trailing){
                                     Button(role: .destructive){
                                         top.delete(hello)
                                         try? top.save()
                                     } label: {
                                      Image(systemName: "trash")
                                     }
+                                    
+                                    Button(){
+                                        
+                                    }label:{
+                                    Label("Edit", systemImage: "pencil.circle.fill")
+                                    }
+                                    .tint(.orange)
+                                }
+                                .swipeActions(edge: .leading){
                                     Button(){
                                         hello.done.toggle()
                                         try? top.save()
@@ -157,13 +242,7 @@ struct EditTaskView: View {
                                         
                                     }
                                     .tint(.green)
-                                    
-                                    Button(){
-                                        
-                                    }label:{
-                                    Label("Edit", systemImage: "pencil.circle.fill")
-                                    }
-                                    .tint(.orange)
+
                                 }
                         }
                     }
@@ -174,24 +253,56 @@ struct EditTaskView: View {
                         if (hello.cais == 4) {
                             NavigationLink{
                                 TaskView(item: hello)                            }label: {
-                                Text(hello.title ?? "Error Loading").overlay {
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 5)
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 13)
-                                }
+                                    VStack{
+                                        
+                                        Text(hello.title ?? "Error Loading")
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .font(.system(size: 15))
+                                            .overlay {
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 5)
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 13)
+                                            }
+                                            
+                                        
+                                            Text(hello.body ?? "Error Loading")
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .font(.system(size: 10))
+                                                .foregroundColor(.gray)
+                                                .overlay {
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 5)
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 13)
+                                                }
+                                        
+                                    }
                             }
-                                .swipeActions(){
+                                .swipeActions(edge: .trailing){
                                     Button(role: .destructive){
                                         top.delete(hello)
                                         try? top.save()
                                     } label: {
                                      Image(systemName: "trash")
                                     }
+                                    
+                                    Button(){
+                                        
+                                    }label:{
+                                    Label("Edit", systemImage: "pencil.circle.fill")
+                                    }
+                                    .tint(.orange)
+                                }
+                                .swipeActions(edge: .leading){
                                     Button(){
                                         hello.done.toggle()
                                         try? top.save()
@@ -206,13 +317,7 @@ struct EditTaskView: View {
                                         
                                     }
                                     .tint(.green)
-                                    
-                                    Button(){
-                                        
-                                    }label:{
-                                    Label("Edit", systemImage: "pencil.circle.fill")
-                                    }
-                                    .tint(.orange)
+
                                 }
                         }
                     }
