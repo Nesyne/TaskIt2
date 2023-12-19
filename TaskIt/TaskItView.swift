@@ -41,8 +41,98 @@ struct TaskItView: View {
                         }
                     
                 }
-             //Todo: wrap this into an if statement for when to show or not based on whether there are calendar events
-                MultyTaskView(dat: $date) 
+            
+                VStack{
+                  Form{
+                            Section("Todays Tasks"){
+                                ForEach(CoreArr){ hello in
+                                    if (hello.start ?? Date() < date) {
+                                        NavigationLink{
+                                            TaskView(item: hello)                            }label: {
+                                                VStack{
+                                                    
+                                                    Text(hello.title ?? "Error Loading")
+                                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                                        .font(.system(size: 15))
+                                                        .overlay {
+                                                            Rectangle()
+                                                                .rotation(.degrees(-90))
+                                                                .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                                .position(x: -16,y: 5)
+                                                            Rectangle()
+                                                                .rotation(.degrees(-90))
+                                                                .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                                .position(x: -16,y: 13)
+                                                        }
+                                                        
+                                                    HStack{
+                                                        Text(hello.body ?? "Error Loading")
+                                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                                            .font(.system(size: 10))
+                                                            .foregroundColor(.gray)
+                                                            .overlay {
+                                                                Rectangle()
+                                                                    .rotation(.degrees(-90))
+                                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                                    .position(x: -16,y: 5)
+                                                                Rectangle()
+                                                                    .rotation(.degrees(-90))
+                                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                                    .position(x: -16,y: 13)
+                                                            }
+                                                        Text(ty(One: Int(hello.cais)))
+                                                            .font(.system(size: 10))
+                                                            .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    }
+                                                }
+
+                                                
+                                                
+                                        }
+                                            .swipeActions(edge: .trailing){
+                                                Button(role: .destructive){
+                                                    top.delete(hello)
+                                                    try? top.save()
+                                                } label: {
+                                                 Image(systemName: "trash")
+                                                }
+                                                
+                                                Button(){
+                                                    
+                                                }label:{
+                                                Label("Edit", systemImage: "pencil.circle.fill")
+                                                }
+                                                .tint(.orange)
+                                            }
+                                            .swipeActions(edge: .leading){
+                                                Button(){
+                                                    hello.done.toggle()
+                                                    try? top.save()
+                                                }label:{
+                                                    
+                                                    if hello.done == false {
+                                                        Label("Finish", systemImage: "checkmark")
+                                                    }
+                                                    else {
+                                                        Label("Un-Finish", systemImage: "multiply")
+                                                    }
+                                                    
+                                                }
+                                                .tint(.green)
+
+                                            }
+                                    }
+                                }
+                                
+                                
+                                
+                            }
+
+                            
+                        }
+                }
+                
+                //Todo: wrap this into an if statement for when to show or not based on whether there are calendar events
                 
             // Optionally: based on the date; get the task and it's type(daily, weekly etc)
                 //Maybe make a listview view here and display the name of the task on the left(and maybe descriptions underneath) and then to right, display the type
@@ -70,8 +160,8 @@ struct TaskItView: View {
                         
                     } label: {
                         HStack{
-                            Image(systemName: "pencil").bold()
-                            Text("Edit Tasks")
+                            Image(systemName: "list.dash").bold()
+                            Text("All Tasks")
                         }
                         }
                     
@@ -92,6 +182,26 @@ struct TaskItView: View {
         }
     }
  
+    func ty(One: Int) -> String{
+        var hi = ""
+        if (One == 1){
+         hi = "Dayly"
+        }
+        else if (One == 2){
+            hi = "Weekly"
+            
+        }
+        else if (One == 3){
+           hi = "Monthly"
+            
+        }
+        else if (One == 4){
+            hi = "Yearly"
+            
+        }
+    return hi
+    }
+    
     func Colors(Num: Int) -> Color{
         var col = Color.gray
         if (Num == 1){

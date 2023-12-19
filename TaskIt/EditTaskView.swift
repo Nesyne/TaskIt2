@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+// AllTaskView
 struct EditTaskView: View {
     @AppStorage("ColorD") var ColorD: Color = .green
     @AppStorage("ColorW") var ColorW: Color = .red
@@ -19,47 +19,157 @@ struct EditTaskView: View {
     var body: some View {
         NavigationView{
             Form{
-                Text("Swipe to delete tasks")
+                Text("All Tasks")
                 Section("Daily Reminders"){
                     ForEach(CoreArr){ hello in
                         if (hello.cais == 1) {
                             NavigationLink{
-                                TaskView(item: hello)
-                            }label: {
-                                Text(hello.title ?? "Error Loading").overlay {
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 5)
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 13)
-                                }
+                                TaskView(item: hello)                            }label: {
+                                    VStack{
+                                        
+                                        Text(hello.title ?? "Error Loading")
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .font(.system(size: 15))
+                                            .overlay {
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 5)
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 13)
+                                            }
+                                            
+                                        
+                                            Text(hello.body ?? "Error Loading")
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .font(.system(size: 10))
+                                                .foregroundColor(.gray)
+                                                .overlay {
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 5)
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 13)
+                                                }
+                                        
+                                    }
                             }
+                                .swipeActions(edge: .trailing){
+                                    Button(role: .destructive){
+                                        top.delete(hello)
+                                        try? top.save()
+                                    } label: {
+                                     Image(systemName: "trash")
+                                    }
+                                    
+                                    Button(){
+                                        
+                                    }label:{
+                                    Label("Edit", systemImage: "pencil.circle.fill")
+                                    }
+                                    .tint(.orange)
+                                }
+                                .swipeActions(edge: .leading){
+                                    Button(){
+                                        hello.done.toggle()
+                                        try? top.save()
+                                    }label:{
+                                        
+                                        if hello.done == false {
+                                            Label("Finish", systemImage: "checkmark")
+                                        }
+                                        else {
+                                            Label("Un-Finish", systemImage: "multiply")
+                                        }
+                                        
+                                    }
+                                    .tint(.green)
+
+                                }
                         }
                     }
-                    .onDelete(perform: dellt)
+                    
+                    
+                    
                 }
                 Section("Weekly Reminders"){
                     ForEach(CoreArr){ hello in
                         if (hello.cais == 2) {
                             NavigationLink{
                                 TaskView(item: hello)                            }label: {
-                                Text(hello.title ?? "Error Loading").overlay {
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 5)
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 13)
-                                }
+                                    VStack{
+                                        
+                                        Text(hello.title ?? "Error Loading")
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .font(.system(size: 15))
+                                            .overlay {
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 5)
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 13)
+                                            }
+                                            
+                                        
+                                            Text(hello.body ?? "Error Loading")
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .font(.system(size: 10))
+                                                .foregroundColor(.gray)
+                                                .overlay {
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 5)
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 13)
+                                                }
+                                        
+                                    }
                             }
+                                .swipeActions(edge: .trailing){
+                                    Button(role: .destructive){
+                                        top.delete(hello)
+                                        try? top.save()
+                                    } label: {
+                                     Image(systemName: "trash")
+                                    }
+                                    
+                                    Button(){
+                                        
+                                    }label:{
+                                    Label("Edit", systemImage: "pencil.circle.fill")
+                                    }
+                                    .tint(.orange)
+                                }
+                                .swipeActions(edge: .leading){
+                                    Button(){
+                                        hello.done.toggle()
+                                        try? top.save()
+                                    }label:{
+                                        
+                                        if hello.done == false {
+                                            Label("Finish", systemImage: "checkmark")
+                                        }
+                                        else {
+                                            Label("Un-Finish", systemImage: "multiply")
+                                        }
+                                        
+                                    }
+                                    .tint(.green)
+
+                                }
                         }
                     }
-                    .onDelete(perform: dellt)
                     
                 }
                 Section("Monthly Reminders"){
@@ -67,19 +177,75 @@ struct EditTaskView: View {
                         if (hello.cais == 3) {
                             NavigationLink{
                                 TaskView(item: hello)                            }label: {
-                                Text(hello.title ?? "Error Loading").overlay {
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 5)
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 13)
-                                }
+                                    VStack{
+                                        
+                                        Text(hello.title ?? "Error Loading")
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .font(.system(size: 15))
+                                            .overlay {
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 5)
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 13)
+                                            }
+                                            
+                                        
+                                            Text(hello.body ?? "Error Loading")
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .font(.system(size: 10))
+                                                .foregroundColor(.gray)
+                                                .overlay {
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 5)
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 13)
+                                                }
+                                        
+                                    }
+
                             }
+                                .swipeActions(edge: .trailing){
+                                    Button(role: .destructive){
+                                        top.delete(hello)
+                                        try? top.save()
+                                    } label: {
+                                     Image(systemName: "trash")
+                                    }
+                                    
+                                    Button(){
+                                        
+                                    }label:{
+                                    Label("Edit", systemImage: "pencil.circle.fill")
+                                    }
+                                    .tint(.orange)
+                                }
+                                .swipeActions(edge: .leading){
+                                    Button(){
+                                        hello.done.toggle()
+                                        try? top.save()
+                                    }label:{
+                                        
+                                        if hello.done == false {
+                                            Label("Finish", systemImage: "checkmark")
+                                        }
+                                        else {
+                                            Label("Un-Finish", systemImage: "multiply")
+                                        }
+                                        
+                                    }
+                                    .tint(.green)
+
+                                }
                         }
-                    }.onDelete(perform: dellt)
+                    }
                     
                 }
                 Section("Yearly Reminders"){
@@ -87,19 +253,74 @@ struct EditTaskView: View {
                         if (hello.cais == 4) {
                             NavigationLink{
                                 TaskView(item: hello)                            }label: {
-                                Text(hello.title ?? "Error Loading").overlay {
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 5)
-                                    Rectangle()
-                                        .rotation(.degrees(-90))
-                                        .foregroundColor(Colors(Num: Int((hello.cais))))
-                                        .position(x: -16,y: 13)
-                                }
+                                    VStack{
+                                        
+                                        Text(hello.title ?? "Error Loading")
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .font(.system(size: 15))
+                                            .overlay {
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 5)
+                                                Rectangle()
+                                                    .rotation(.degrees(-90))
+                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                    .position(x: -16,y: 13)
+                                            }
+                                            
+                                        
+                                            Text(hello.body ?? "Error Loading")
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .font(.system(size: 10))
+                                                .foregroundColor(.gray)
+                                                .overlay {
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 5)
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 13)
+                                                }
+                                        
+                                    }
                             }
+                                .swipeActions(edge: .trailing){
+                                    Button(role: .destructive){
+                                        top.delete(hello)
+                                        try? top.save()
+                                    } label: {
+                                     Image(systemName: "trash")
+                                    }
+                                    
+                                    Button(){
+                                        
+                                    }label:{
+                                    Label("Edit", systemImage: "pencil.circle.fill")
+                                    }
+                                    .tint(.orange)
+                                }
+                                .swipeActions(edge: .leading){
+                                    Button(){
+                                        hello.done.toggle()
+                                        try? top.save()
+                                    }label:{
+                                        
+                                        if hello.done == false {
+                                            Label("Finish", systemImage: "checkmark")
+                                        }
+                                        else {
+                                            Label("Un-Finish", systemImage: "multiply")
+                                        }
+                                        
+                                    }
+                                    .tint(.green)
+
+                                }
                         }
-                    }.onDelete(perform: dellt)
+                    }
                     
                 }
                 

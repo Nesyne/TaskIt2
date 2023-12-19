@@ -21,6 +21,7 @@ struct TaskView: View  {
    @State var bod = ""
    @State var type = 0
    @State var done = false
+   @State var rtype = 0
    
    @State var item : Task
  
@@ -92,6 +93,23 @@ struct TaskView: View  {
                 
             }
             Section{
+               
+                    if editting == true {
+                        HStack{
+                        Picker("Change reminder type", selection: $rtype){
+                            ForEach(1..<5){
+                                Text(ty(One: $0))
+                            }
+                        }
+                        .tint(.blue)
+                        .onAppear(){
+                            typeF()
+                        }
+                    }
+                    
+                }
+            }
+            Section{
                 HStack{
                     Text(done ? "Completed" : "Not Completed")
                         .foregroundColor(done ? Color.green : Color.red)
@@ -116,13 +134,14 @@ struct TaskView: View  {
                     editting.toggle()
                     item.title = tittle
                     item.body = bod
+                    item.cais = Int16(rtype+1)
                     try? top.save()
                 } label: {
                     if editting {
                         Text("Done")
                     }
                     else{
-                        Image(systemName: "rectangle.and.pencil.and.ellipsis")
+                        Text("Edit")
                     }
                 }
             }
@@ -135,6 +154,7 @@ struct TaskView: View  {
     
     func typeF(){
         type = Int(item.cais)
+        rtype = type-1
         tittle = item.title ?? "Error"
         bod = item.body ?? "Error"
         done = item.done
@@ -154,6 +174,25 @@ struct TaskView: View  {
          //error handling
         }
         
+    }
+    func ty(One: Int) -> String{
+        var hi = ""
+        if (One == 1){
+         hi = "Dayly"
+        }
+        else if (One == 2){
+            hi = "Weekly"
+            
+        }
+        else if (One == 3){
+           hi = "Monthly"
+            
+        }
+        else if (One == 4){
+            hi = "Yearly"
+            
+        }
+    return hi
     }
 }
 
