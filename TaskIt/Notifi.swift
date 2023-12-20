@@ -17,7 +17,7 @@ class Notifi {
     
         using.sound = UNNotificationSound.default
         let trig = UNTimeIntervalNotificationTrigger(timeInterval: 0.1 , repeats: false)
-        let req = UNNotificationRequest(identifier: UUID().uuidString, content: using, trigger: trig)
+        _ = UNNotificationRequest(identifier: UUID().uuidString, content: using, trigger: trig)
     }
     
     

@@ -12,7 +12,7 @@ class ControlData: ObservableObject{
     let obj = NSPersistentContainer(name: "TaskModel")
     init(){
         obj.loadPersistentStores{ description, error in
-            if let error = error {
+            if error != nil {
                 print("There was an error making the obj")
             }
         }
