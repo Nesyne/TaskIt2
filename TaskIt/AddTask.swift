@@ -77,7 +77,7 @@ struct AddTask: View {
     func ty(One: Int) -> String{
         var hi = ""
         if (One == 1){
-         hi = "Dayly"
+         hi = "Daily"
         }
         else if (One == 2){
             hi = "Weekly"
