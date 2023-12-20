@@ -34,7 +34,7 @@ struct TaskItView: View {
                                     print("All set")
                                     
                                 }
-                                else if let error = error{
+                                else if error != nil{
                                     print("Broke")
                                 }
                             }
@@ -185,18 +185,18 @@ struct TaskItView: View {
     func ty(One: Int) -> String{
         var hi = ""
         if (One == 1){
-         hi = "Dayly"
+         hi = "DAILY"
         }
         else if (One == 2){
-            hi = "Weekly"
+            hi = "WEEKLY"
             
         }
         else if (One == 3){
-           hi = "Monthly"
+           hi = "MONTHLY"
             
         }
         else if (One == 4){
-            hi = "Yearly"
+            hi = "YEARLY"
             
         }
     return hi
