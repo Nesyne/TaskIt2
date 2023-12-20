@@ -19,24 +19,28 @@ struct AddTask: View {
     @Environment(\.dismiss) var dismiss
     var body: some View {
         NavigationView{
-            VStack {
-                ScrollView{
+            Form{
+                Section {
+                    
                     TextField("Task Name", text: $tittle1).padding()
                     TextField("Description", text: $bodie1).padding()
-                    DatePicker("Task Start Date", selection: $Start, displayedComponents: [.date, .hourAndMinute]).padding()
-                    HStack{
-                        Text("Choose a reminder type")
-                        Picker("Choose a reminder type", selection: $rtype){
+                }
+                Section {
+                    DatePicker("Starts ", selection: $Start, displayedComponents: [.date, .hourAndMinute]).padding()
+                }
+                    Section{
+                    
+                        Picker("Frequency", selection: $rtype){
                             ForEach(1..<5){
                                 Text(ty(One: $0))
                             }
                         }
                         .tint(.blue)
-                    }
-              
+                    
+                    //Add descrition of each type of reminder
+                    
                 }
             }
-            
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button(){
@@ -64,9 +68,10 @@ struct AddTask: View {
                         Text("Cancel")
                     }
                 }
-
+                
                 
             }
+        
         }
     }
     func ty(One: Int) -> String{
