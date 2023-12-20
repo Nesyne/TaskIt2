@@ -44,7 +44,8 @@ struct TaskItView: View {
             
                 VStack{
                   Form{
-                            Section("Todays Tasks"){
+                      //Hide section header when there are tasks tasks
+                      Section("Tasks will be show here"){
                                 ForEach(CoreArr){ hello in
                                     if (hello.start ?? Date() < date) {
                                         NavigationLink{
@@ -145,28 +146,6 @@ struct TaskItView: View {
             .padding()
             .navigationTitle("TaskIt")
             .toolbar{
-                ToolbarItem(placement: .bottomBar){
-                    NavigationLink{
-                        SettingView()
-                        
-                    } label: {
-                        Image(systemName: "gearshape")
-                    }
-                    
-                }
-                ToolbarItem(placement: .navigationBarLeading){
-                    NavigationLink{
-                        EditTaskView()
-                        
-                    } label: {
-                        HStack{
-                            Image(systemName: "list.dash").bold()
-                            Text("All Tasks")
-                        }
-                        }
-                    
-                }
-                
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button(){
                         add.toggle()
@@ -177,6 +156,30 @@ struct TaskItView: View {
                         AddTask()
                     }
                 }
+
+                ToolbarItem(placement: .bottomBar){
+                    NavigationLink{
+                        EditTaskView()
+                        
+                    } label: {
+                        HStack{
+                            Image(systemName: "list.dash").bold()
+                        }
+                        }
+                    
+                }
+                ToolbarItem(placement: .bottomBar){
+                    NavigationLink{
+                        SettingView()
+                        
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                    
+                }
+                
+               
+
                 
             }
         }

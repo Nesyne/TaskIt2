@@ -22,11 +22,11 @@ struct AddTask: View {
             Form{
                 Section {
                     
-                    TextField("Task Name", text: $tittle1).padding()
-                    TextField("Description", text: $bodie1).padding()
+                    TextField("Task Name", text: $tittle1)
+                    TextField("Description", text: $bodie1)
                 }
                 Section {
-                    DatePicker("Starts ", selection: $Start, displayedComponents: [.date, .hourAndMinute]).padding()
+                    DatePicker("Starts ", selection: $Start, displayedComponents: [.date, .hourAndMinute])
                 }
                     Section{
                     
@@ -77,7 +77,7 @@ struct AddTask: View {
     func ty(One: Int) -> String{
         var hi = ""
         if (One == 1){
-         hi = "Dayly"
+         hi = "Daily"
         }
         else if (One == 2){
             hi = "Weekly"
