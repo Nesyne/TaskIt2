@@ -16,6 +16,13 @@ struct EditTaskView: View {
     @Environment(\.managedObjectContext) var top
     @FetchRequest(sortDescriptors: []) var CoreArr: FetchedResults<Task>
     
+    //Change tittle to header
+    //Hide section tittle when there are no tasks
+    
+    // make tasks pop-up view, go straight to edit and have a save and cancel at the top
+    
+    
+    
     var body: some View {
         NavigationView{
             Form{

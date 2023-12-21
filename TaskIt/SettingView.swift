@@ -19,9 +19,11 @@ struct SettingView: View {
     @State var day = 0
     var body: some View {
         Form {
-
-            Section(header: Text("Your Start and stop time for a day")){
-                DatePicker("The start of your day", selection: $dateS, displayedComponents: .hourAndMinute)
+// Take away save buttons
+//make subs sections for each type of reminder and set days/time if needed
+// make the start higher
+            Section(header: Text("Day start and end times")){
+                DatePicker("Starts", selection: $dateS, displayedComponents: .hourAndMinute)
                     .onAppear(){
                         if (UserDefaults.standard.object(forKey: "SDay") != nil){
                             dateS = UserDefaults.standard.object(forKey: "SDay") as! Date
@@ -37,7 +39,7 @@ struct SettingView: View {
                         }
                     }
                 
-                DatePicker("The end of your day", selection: $dateD, displayedComponents: .hourAndMinute)
+                DatePicker("Ends", selection: $dateD, displayedComponents: .hourAndMinute)
                 
                 Button("Save times"){
                     UserDefaults.standard.set(dateS, forKey: "SDay")
@@ -65,16 +67,17 @@ struct SettingView: View {
                         Text(type(num: $0))
                     }
                 }
+                .tint(.blue)
                 Button("Save time and day"){
                     UserDefaults.standard.set(dateDW, forKey: "NTime")
                     UserDefaults.standard.set(day, forKey: "Month")
                 }
             }
-            Section(header: Text("Reminder Color")){
-                ColorPicker("Daily Color Code", selection: $ColorD)
-                ColorPicker("Weekly Color Code", selection: $ColorW)
-                ColorPicker("Monthly Color Code", selection: $ColorM)
-                ColorPicker("Yearly Color Code", selection: $ColorY)
+            Section(header: Text("Task Colors")){
+                ColorPicker("Daily", selection: $ColorD)
+                ColorPicker("Weekly", selection: $ColorW)
+                ColorPicker("Monthly", selection: $ColorM)
+                ColorPicker("Yearly", selection: $ColorY)
             }
         }
     }

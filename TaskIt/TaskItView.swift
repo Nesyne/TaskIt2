@@ -21,6 +21,11 @@ struct TaskItView: View {
     @Environment(\.managedObjectContext) var top
     @FetchRequest(sortDescriptors: []) var CoreArr: FetchedResults<Task>
     
+    //fix color rectangle
+    // put small space between items
+    //make color bar thiner
+    // put start day under item type
+    
     var body: some View {
         NavigationView{
             VStack {
@@ -51,7 +56,8 @@ struct TaskItView: View {
                                         NavigationLink{
                                             TaskView(item: hello)                            }label: {
                                                 VStack{
-                                                    
+                                                    HStack{
+                                                        
                                                     Text(hello.title ?? "Error Loading")
                                                         .frame(maxWidth: .infinity, alignment: .leading)
                                                         .font(.system(size: 15))
@@ -65,8 +71,10 @@ struct TaskItView: View {
                                                                 .foregroundColor(Colors(Num: Int((hello.cais))))
                                                                 .position(x: -16,y: 13)
                                                         }
-                                                        
-                                                    HStack{
+                                                        Text(ty(One: Int(hello.cais)))
+                                                            .font(.system(size: 10))
+                                                            .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                }
                                                         Text(hello.body ?? "Error Loading")
                                                             .frame(maxWidth: .infinity, alignment: .leading)
                                                             .font(.system(size: 10))
@@ -81,10 +89,8 @@ struct TaskItView: View {
                                                                     .foregroundColor(Colors(Num: Int((hello.cais))))
                                                                     .position(x: -16,y: 13)
                                                             }
-                                                        Text(ty(One: Int(hello.cais)))
-                                                            .font(.system(size: 10))
-                                                            .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    }
+                                                      
+                                                    
                                                 }
 
                                                 
