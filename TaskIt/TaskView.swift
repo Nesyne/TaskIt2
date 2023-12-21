@@ -29,7 +29,7 @@ struct TaskView: View  {
     
    @State var color = Color.green
     var body: some View {
-        
+       //make box on the right side of the bar
         
         Form{
             Section{
@@ -118,7 +118,7 @@ struct TaskView: View  {
                         item.done = done
                         try? top.save()
                     } label: {
-                        Image(systemName: done ? "circle.inset.filled" : "circle")
+                        Image(systemName: done ? "checkmark.square" : "square")
                             .foregroundColor(Color.black)
                     }
                     
