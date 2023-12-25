@@ -75,6 +75,7 @@ struct TaskItView: View {
                                                             .font(.system(size: 10))
                                                             .foregroundColor(Colors(Num: Int((hello.cais))))
                                                 }
+                                                    HStack{
                                                         Text(hello.body ?? "Error Loading")
                                                             .frame(maxWidth: .infinity, alignment: .leading)
                                                             .font(.system(size: 10))
@@ -89,8 +90,12 @@ struct TaskItView: View {
                                                                     .foregroundColor(Colors(Num: Int((hello.cais))))
                                                                     .position(x: -16,y: 13)
                                                             }
-                                                      
-                                                    
+                                                        
+                                                        Text(hello.start ?? Date.now, style: .date)
+                                                            .font(.system(size: 10))
+                                                            .foregroundColor(.gray)
+                                                        
+                                                    }
                                                 }
 
                                                 

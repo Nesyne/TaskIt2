@@ -113,6 +113,9 @@ struct TaskView: View  {
                 HStack{
                     Text(done ? "Completed" : "Not Completed")
                         .foregroundColor(done ? Color.green : Color.red)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    
                     Button{
                         done.toggle()
                         item.done = done
@@ -121,6 +124,7 @@ struct TaskView: View  {
                         Image(systemName: done ? "checkmark.square" : "square")
                             .foregroundColor(Color.black)
                     }
+                   
                     
                 }
                 

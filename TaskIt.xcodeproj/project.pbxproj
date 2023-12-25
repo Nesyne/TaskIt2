@@ -19,12 +19,10 @@
 		BC372B6D2A395E3100A98C3B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC372B6C2A395E3100A98C3B /* Color.swift */; };
 		BC3DD57F2A4B627A00A62A2C /* CaseNotifi.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3DD57E2A4B627A00A62A2C /* CaseNotifi.swift */; };
 		BC6507102A32CF330073ED89 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC65070F2A32CF330073ED89 /* SettingView.swift */; };
-		BC8D08042A3BAF4200C2DE4E /* MultyTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8D08032A3BAF4200C2DE4E /* MultyTaskView.swift */; };
 		BC9032B52A31843E003367AA /* AddTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9032B42A31843E003367AA /* AddTask.swift */; };
 		BC9032B72A31844F003367AA /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9032B62A31844F003367AA /* TaskView.swift */; };
 		BC9032B92A31853D003367AA /* TaskItView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9032B82A31853D003367AA /* TaskItView.swift */; };
 		BCABB33D2A4CD35900E37C70 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABB33C2A4CD35900E37C70 /* EditTaskView.swift */; };
-		BCED30822A3CEA1C00276B40 /* MasterAlg.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCED30812A3CEA1C00276B40 /* MasterAlg.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,12 +59,10 @@
 		BC372B6C2A395E3100A98C3B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		BC3DD57E2A4B627A00A62A2C /* CaseNotifi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseNotifi.swift; sourceTree = "<group>"; };
 		BC65070F2A32CF330073ED89 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		BC8D08032A3BAF4200C2DE4E /* MultyTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultyTaskView.swift; sourceTree = "<group>"; };
 		BC9032B42A31843E003367AA /* AddTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTask.swift; sourceTree = "<group>"; };
 		BC9032B62A31844F003367AA /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		BC9032B82A31853D003367AA /* TaskItView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItView.swift; sourceTree = "<group>"; };
 		BCABB33C2A4CD35900E37C70 /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
-		BCED30812A3CEA1C00276B40 /* MasterAlg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterAlg.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,12 +116,10 @@
 				BC308C332A31436400EACBD9 /* TaskItApp.swift */,
 				BC9032B82A31853D003367AA /* TaskItView.swift */,
 				BCABB33C2A4CD35900E37C70 /* EditTaskView.swift */,
-				BC8D08032A3BAF4200C2DE4E /* MultyTaskView.swift */,
 				BC372B6C2A395E3100A98C3B /* Color.swift */,
 				BC372B6A2A394FF300A98C3B /* ControlData.swift */,
 				BC372B672A394EA100A98C3B /* TaskModel.xcdatamodeld */,
 				BC9032B42A31843E003367AA /* AddTask.swift */,
-				BCED30812A3CEA1C00276B40 /* MasterAlg.swift */,
 				BC2311AF2A3CEEC200975DBB /* Notifi.swift */,
 				BC9032B62A31844F003367AA /* TaskView.swift */,
 				BC65070F2A32CF330073ED89 /* SettingView.swift */,
@@ -294,14 +288,12 @@
 			files = (
 				BC3DD57F2A4B627A00A62A2C /* CaseNotifi.swift in Sources */,
 				BCABB33D2A4CD35900E37C70 /* EditTaskView.swift in Sources */,
-				BCED30822A3CEA1C00276B40 /* MasterAlg.swift in Sources */,
 				BC2311B02A3CEEC200975DBB /* Notifi.swift in Sources */,
 				BC372B6B2A394FF300A98C3B /* ControlData.swift in Sources */,
 				BC9032B92A31853D003367AA /* TaskItView.swift in Sources */,
 				BC6507102A32CF330073ED89 /* SettingView.swift in Sources */,
 				BC372B692A394EA100A98C3B /* TaskModel.xcdatamodeld in Sources */,
 				BC308C342A31436400EACBD9 /* TaskItApp.swift in Sources */,
-				BC8D08042A3BAF4200C2DE4E /* MultyTaskView.swift in Sources */,
 				BC372B6D2A395E3100A98C3B /* Color.swift in Sources */,
 				BC9032B52A31843E003367AA /* AddTask.swift in Sources */,
 				BC9032B72A31844F003367AA /* TaskView.swift in Sources */,
