@@ -16,6 +16,11 @@ struct EditTaskView: View {
     @Environment(\.managedObjectContext) var top
     @FetchRequest(sortDescriptors: []) var CoreArr: FetchedResults<Task>
     
+    @State var Popup1 = false
+    @State var Popup2 = false
+    @State var Popup3 = false
+    @State var Popup4 = false
+    
     //Change tittle to header
     //Hide section tittle when there are no tasks
     
@@ -24,31 +29,30 @@ struct EditTaskView: View {
     
     
     var body: some View {
-        NavigationView{
             Form{
-                Text("All Tasks")
                 Section("Daily Reminders"){
                     ForEach(CoreArr){ hello in
                         if (hello.cais == 1) {
-                            NavigationLink{
-                                TaskView(item: hello)                            }label: {
-                                    VStack{
-                                        
-                                        Text(hello.title ?? "Error Loading")
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .font(.system(size: 15))
-                                            .overlay {
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 5)
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 13)
-                                            }
+                            Button(){
+                                Popup1.toggle()                            }label: {
+                                    HStack{
+                                        VStack{
                                             
-                                        
+                                            Text(hello.title ?? "Error Loading")
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .font(.system(size: 15))
+                                                .overlay {
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 5)
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 13)
+                                                }
+                                                .foregroundColor(.black)
+                                            
                                             Text(hello.body ?? "Error Loading")
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .font(.system(size: 10))
@@ -63,9 +67,18 @@ struct EditTaskView: View {
                                                         .foregroundColor(Colors(Num: Int((hello.cais))))
                                                         .position(x: -16,y: 13)
                                                 }
+                                            
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
                                         
+                                        Image(systemName: "chevron.up")
+                                    }
+                                    .sheet(isPresented: $Popup1){
+                                        TaskPopView(item: hello)
                                     }
                             }
+                               
+
                                 .swipeActions(edge: .trailing){
                                     Button(role: .destructive){
                                         top.delete(hello)
@@ -107,25 +120,26 @@ struct EditTaskView: View {
                 Section("Weekly Reminders"){
                     ForEach(CoreArr){ hello in
                         if (hello.cais == 2) {
-                            NavigationLink{
-                                TaskView(item: hello)                            }label: {
-                                    VStack{
-                                        
-                                        Text(hello.title ?? "Error Loading")
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .font(.system(size: 15))
-                                            .overlay {
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 5)
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 13)
-                                            }
+                            Button(){
+                                Popup2.toggle()                            }label: {
+                                    HStack{
+                                        VStack{
                                             
-                                        
+                                            Text(hello.title ?? "Error Loading")
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .font(.system(size: 15))
+                                                .overlay {
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 5)
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 13)
+                                                }
+                                                .foregroundColor(.black)
+                                            
                                             Text(hello.body ?? "Error Loading")
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .font(.system(size: 10))
@@ -140,9 +154,15 @@ struct EditTaskView: View {
                                                         .foregroundColor(Colors(Num: Int((hello.cais))))
                                                         .position(x: -16,y: 13)
                                                 }
+                                            
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
                                         
+                                        Image(systemName: "chevron.up")
                                     }
-                            }
+                            }                                .sheet(isPresented: $Popup2){
+                                    TaskPopView(item: hello)
+                                }
                                 .swipeActions(edge: .trailing){
                                     Button(role: .destructive){
                                         top.delete(hello)
@@ -182,25 +202,26 @@ struct EditTaskView: View {
                 Section("Monthly Reminders"){
                     ForEach(CoreArr){ hello in
                         if (hello.cais == 3) {
-                            NavigationLink{
-                                TaskView(item: hello)                            }label: {
-                                    VStack{
-                                        
-                                        Text(hello.title ?? "Error Loading")
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .font(.system(size: 15))
-                                            .overlay {
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 5)
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 13)
-                                            }
+                            Button(){
+                                Popup3.toggle()                            }label: {
+                                    HStack{
+                                        VStack{
                                             
-                                        
+                                            Text(hello.title ?? "Error Loading")
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .font(.system(size: 15))
+                                                .overlay {
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 5)
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 13)
+                                                }
+                                                .foregroundColor(.black)
+                                            
                                             Text(hello.body ?? "Error Loading")
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .font(.system(size: 10))
@@ -215,9 +236,14 @@ struct EditTaskView: View {
                                                         .foregroundColor(Colors(Num: Int((hello.cais))))
                                                         .position(x: -16,y: 13)
                                                 }
+                                            
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
                                         
+                                        Image(systemName: "chevron.up")
                                     }
-
+                            }    .sheet(isPresented: $Popup3){
+                                TaskPopView(item: hello)
                             }
                                 .swipeActions(edge: .trailing){
                                     Button(role: .destructive){
@@ -258,25 +284,26 @@ struct EditTaskView: View {
                 Section("Yearly Reminders"){
                     ForEach(CoreArr){ hello in
                         if (hello.cais == 4) {
-                            NavigationLink{
-                                TaskView(item: hello)                            }label: {
-                                    VStack{
-                                        
-                                        Text(hello.title ?? "Error Loading")
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .font(.system(size: 15))
-                                            .overlay {
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 5)
-                                                Rectangle()
-                                                    .rotation(.degrees(-90))
-                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                    .position(x: -16,y: 13)
-                                            }
+                            Button(){
+                                Popup4.toggle()                            }label: {
+                                    HStack{
+                                        VStack{
                                             
-                                        
+                                            Text(hello.title ?? "Error Loading")
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .font(.system(size: 15))
+                                                .overlay {
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 5)
+                                                    Rectangle()
+                                                        .rotation(.degrees(-90))
+                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .position(x: -16,y: 13)
+                                                }
+                                                .foregroundColor(.black)
+                                            
                                             Text(hello.body ?? "Error Loading")
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .font(.system(size: 10))
@@ -291,9 +318,15 @@ struct EditTaskView: View {
                                                         .foregroundColor(Colors(Num: Int((hello.cais))))
                                                         .position(x: -16,y: 13)
                                                 }
+                                            
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
                                         
+                                        Image(systemName: "chevron.up")
                                     }
-                            }
+                            }                                .sheet(isPresented: $Popup4){
+                                    TaskPopView(item: hello)
+                                }
                                 .swipeActions(edge: .trailing){
                                     Button(role: .destructive){
                                         top.delete(hello)
@@ -332,7 +365,7 @@ struct EditTaskView: View {
                 }
                 
             }
-        }
+        
     }
     
     func dellt(at offset: IndexSet){

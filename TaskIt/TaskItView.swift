@@ -51,89 +51,92 @@ struct TaskItView: View {
                   Form{
                       //Hide section header when there are tasks tasks
                       Section("Tasks will be show here"){
-                                ForEach(CoreArr){ hello in
-                                    if (hello.start ?? Date() < date) {
-                                        NavigationLink{
-                                            TaskView(item: hello)                            }label: {
-                                                VStack{
-                                                    HStack{
-                                                        
-                                                    Text(hello.title ?? "Error Loading")
-                                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                                        .font(.system(size: 15))
-                                                        .overlay {
-                                                            Rectangle()
-                                                                .rotation(.degrees(-90))
-                                                                .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                                .position(x: -16,y: 5)
-                                                            Rectangle()
-                                                                .rotation(.degrees(-90))
-                                                                .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                                .position(x: -16,y: 13)
-                                                        }
-                                                        Text(ty(One: Int(hello.cais)))
-                                                            .font(.system(size: 10))
-                                                            .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                }
-                                                    HStack{
-                                                        Text(hello.body ?? "Error Loading")
-                                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                                            .font(.system(size: 10))
-                                                            .foregroundColor(.gray)
-                                                            .overlay {
-                                                                Rectangle()
-                                                                    .rotation(.degrees(-90))
-                                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                                    .position(x: -16,y: 5)
-                                                                Rectangle()
-                                                                    .rotation(.degrees(-90))
-                                                                    .foregroundColor(Colors(Num: Int((hello.cais))))
-                                                                    .position(x: -16,y: 13)
-                                                            }
-                                                        
-                                                        Text(hello.start ?? Date.now, style: .date)
-                                                            .font(.system(size: 10))
-                                                            .foregroundColor(.gray)
-                                                        
-                                                    }
-                                                }
-
-                                                
-                                                
-                                        }
-                                            .swipeActions(edge: .trailing){
-                                                Button(role: .destructive){
-                                                    top.delete(hello)
-                                                    try? top.save()
-                                                } label: {
-                                                 Image(systemName: "trash")
-                                                }
-                                                
-                                                Button(){
-                                                    
-                                                }label:{
-                                                Label("Edit", systemImage: "pencil.circle.fill")
-                                                }
-                                                .tint(.orange)
-                                            }
-                                            .swipeActions(edge: .leading){
-                                                Button(){
-                                                    hello.done.toggle()
-                                                    try? top.save()
-                                                }label:{
-                                                    
-                                                    if hello.done == false {
-                                                        Label("Finish", systemImage: "checkmark")
-                                                    }
-                                                    else {
-                                                        Label("Un-Finish", systemImage: "multiply")
-                                                    }
-                                                    
-                                                }
-                                                .tint(.green)
-
-                                            }
-                                    }
+                          List{
+                          ForEach(CoreArr){ hello in
+                              if (hello.start ?? Date() < date) {
+                                  NavigationLink{
+                                      TaskView(item: hello)                            }label: {
+                                          VStack{
+                                              HStack{
+                                                  
+                                                  Text(hello.title ?? "Error Loading")
+                                                      .frame(maxWidth: .infinity, alignment: .leading)
+                                                      .font(.system(size: 15))
+                                                      .overlay {
+                                                          Rectangle()
+                                                              .rotation(.degrees(-90))
+                                                              .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                              .position(x: -16,y: 5)
+                                                          Rectangle()
+                                                              .rotation(.degrees(-90))
+                                                              .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                              .position(x: -16,y: 13)
+                                                      }
+                                                  Text(ty(One: Int(hello.cais)))
+                                                      .font(.system(size: 10))
+                                                      .foregroundColor(Colors(Num: Int((hello.cais))))
+                                              }
+                                              HStack{
+                                                  Text(hello.body ?? "Error Loading")
+                                                      .frame(maxWidth: .infinity, alignment: .leading)
+                                                      .font(.system(size: 10))
+                                                      .foregroundColor(.gray)
+                                                      .overlay {
+                                                          Rectangle()
+                                                              .rotation(.degrees(-90))
+                                                              .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                              .position(x: -16,y: 5)
+                                                          Rectangle()
+                                                              .rotation(.degrees(-90))
+                                                              .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                              .position(x: -16,y: 13)
+                                                      }
+                                                  
+                                                  Text(hello.start ?? Date.now, style: .date)
+                                                      .font(.system(size: 10))
+                                                      .foregroundColor(.gray)
+                                                  
+                                              }
+                                          }
+                                          
+                                          
+                                          
+                                      }
+                                  
+                                      .swipeActions(edge: .trailing){
+                                          Button(role: .destructive){
+                                              top.delete(hello)
+                                              try? top.save()
+                                          } label: {
+                                              Image(systemName: "trash")
+                                          }
+                                          
+                                          Button(){
+                                              
+                                          }label:{
+                                              Label("Edit", systemImage: "pencil.circle.fill")
+                                          }
+                                          .tint(.orange)
+                                      }
+                                      .swipeActions(edge: .leading){
+                                          Button(){
+                                              hello.done.toggle()
+                                              try? top.save()
+                                          }label:{
+                                              
+                                              if hello.done == false {
+                                                  Label("Finish", systemImage: "checkmark")
+                                              }
+                                              else {
+                                                  Label("Un-Finish", systemImage: "multiply")
+                                              }
+                                              
+                                          }
+                                          .tint(.green)
+                                          
+                                      }
+                              }
+                          }
                                 }
                                 
                                 
@@ -171,6 +174,7 @@ struct TaskItView: View {
                 ToolbarItem(placement: .bottomBar){
                     NavigationLink{
                         EditTaskView()
+                            .navigationTitle("All Tasks")
                         
                     } label: {
                         HStack{
