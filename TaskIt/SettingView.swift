@@ -13,71 +13,66 @@ struct SettingView: View {
     @AppStorage("ColorM") var ColorM: Color = .orange
     @AppStorage("ColorY") var ColorY: Color = .blue
     
+    @Environment(\.dismiss) var dismiss
+    
     @State var dateS = Date()
     @State var dateD = Date()
     @State var dateDW = Date()
     @State var day = 0
     var body: some View {
-        Form {
-// Take away save buttons
-//make subs sections for each type of reminder and set days/time if needed
-// make the start higher
-            Section(header: Text("Day start and end times")){
-                DatePicker("Starts", selection: $dateS, displayedComponents: .hourAndMinute)
-                    .onAppear(){
-                        if (UserDefaults.standard.object(forKey: "SDay") != nil){
-                            dateS = UserDefaults.standard.object(forKey: "SDay") as! Date
+        NavigationView{
+            Form {
+                // Take away save buttons
+                //make subs sections for each type of reminder and set days/time if needed
+                // make the start higher
+                Section(header: Text("Day start and end times")){
+                    DatePicker("Starts", selection: $dateS, displayedComponents: .hourAndMinute)
+                        .onAppear(){
+                           load()
                         }
-                        else{
-                            UserDefaults.standard.set(Date(), forKey: "SDay")
+                    
+                    DatePicker("Ends", selection: $dateD, displayedComponents: .hourAndMinute)
+                        .onAppear(){
+                           load()
                         }
-                        if (UserDefaults.standard.object(forKey: "EDay") != nil){
-                            dateD = UserDefaults.standard.object(forKey: "EDay") as! Date
+                    
+                    
+                    
+                }
+                Section(header: Text("Notification Times")){
+                    DatePicker("Non-daily notifications are sent at", selection: $dateDW, displayedComponents: .hourAndMinute)
+                        .onAppear(){
+                            load()
                         }
-                        else{
-                            UserDefaults.standard.set(Date(), forKey: "EDay")
+                    Picker("Non-daily/weekly notifications will be sent on", selection: $day){
+                        ForEach(0..<7){
+                            Text(type(num: $0))
                         }
                     }
-                
-                DatePicker("Ends", selection: $dateD, displayedComponents: .hourAndMinute)
-                
-                Button("Save times"){
-                    UserDefaults.standard.set(dateS, forKey: "SDay")
-                    UserDefaults.standard.set(dateD, forKey: "EDay")
+                    .tint(.blue)
+                    
+                }
+                Section(header: Text("Task Colors")){
+                    ColorPicker("Daily", selection: $ColorD)
+                    ColorPicker("Weekly", selection: $ColorW)
+                    ColorPicker("Monthly", selection: $ColorM)
+                    ColorPicker("Yearly", selection: $ColorY)
                 }
             }
-            Section(header: Text("Notification Times")){
-                DatePicker("Non-daily notifications are sent at", selection: $dateDW, displayedComponents: .hourAndMinute)
-                    .onAppear(){
-                        if (UserDefaults.standard.object(forKey: "NTime") != nil){
-                            dateDW = UserDefaults.standard.object(forKey: "NTime") as! Date
-                        }
-                        else{
-                            UserDefaults.standard.set(Date(), forKey: "NTime")
-                        }
-                        if (UserDefaults.standard.object(forKey: "Month") != nil){
-                            day = UserDefaults.standard.object(forKey: "Month") as! Int
-                        }
-                        else{
-                            UserDefaults.standard.set(0, forKey: "Month")
+            .toolbar{
+                
+                ToolbarItem(placement: .navigationBarLeading){
+                    Button(){
+                        save()
+                        dismiss()
+                    } label: {
+                        HStack{
+                            Image(systemName: "chevron.backward").bold()
+                            Text("TaskIt")
                         }
                     }
-                Picker("Non-daily/weekly notifications will be sent on", selection: $day){
-                    ForEach(0..<7){
-                        Text(type(num: $0))
-                    }
                 }
-                .tint(.blue)
-                Button("Save time and day"){
-                    UserDefaults.standard.set(dateDW, forKey: "NTime")
-                    UserDefaults.standard.set(day, forKey: "Month")
-                }
-            }
-            Section(header: Text("Task Colors")){
-                ColorPicker("Daily", selection: $ColorD)
-                ColorPicker("Weekly", selection: $ColorW)
-                ColorPicker("Monthly", selection: $ColorM)
-                ColorPicker("Yearly", selection: $ColorY)
+                
             }
         }
     }
@@ -108,6 +103,47 @@ struct SettingView: View {
         return ans
     }
    
+    func save(){
+        UserDefaults.standard.set(dateS, forKey: "SDay")
+        UserDefaults.standard.set(dateD, forKey: "EDay")
+        
+        UserDefaults.standard.set(dateDW, forKey: "NTime")
+        UserDefaults.standard.set(day, forKey: "Month")
+        
+    }
+    
+    func load() {
+        if (UserDefaults.standard.object(forKey: "SDay") != nil){
+            dateS = UserDefaults.standard.object(forKey: "SDay") as! Date
+        }
+        else{
+            UserDefaults.standard.set(Date(), forKey: "SDay")
+        }
+        if (UserDefaults.standard.object(forKey: "EDay") != nil){
+            dateD = UserDefaults.standard.object(forKey: "EDay") as! Date
+        }
+        else{
+            UserDefaults.standard.set(Date(), forKey: "EDay")
+        }
+       
+        
+        
+        if (UserDefaults.standard.object(forKey: "NTime") != nil){
+            dateDW = UserDefaults.standard.object(forKey: "NTime") as! Date
+        }
+        else{
+            UserDefaults.standard.set(Date(), forKey: "NTime")
+        }
+        if (UserDefaults.standard.object(forKey: "Month") != nil){
+            day = UserDefaults.standard.object(forKey: "Month") as! Int
+        }
+        else{
+            UserDefaults.standard.set(0, forKey: "Month")
+        }
+        
+       
+    }
+    
 }
 
 struct SettingView_Previews: PreviewProvider {

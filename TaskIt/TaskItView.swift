@@ -31,7 +31,7 @@ struct TaskItView: View {
             VStack {
                 VStack{
                     DatePicker("Start of you day", selection: $date, displayedComponents: .date)
-                        .datePickerStyle(GraphicalDatePickerStyle()) //Todo: Look for a vertically oriented style of the graphical calender
+                        .datePickerStyle(GraphicalDatePickerStyle()) 
                         .frame(maxHeight: 400)
                         .onAppear(){
                             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]){ success, error in
@@ -186,6 +186,7 @@ struct TaskItView: View {
                 ToolbarItem(placement: .bottomBar){
                     NavigationLink{
                         SettingView()
+                            .navigationBarBackButtonHidden(true)
                         
                     } label: {
                         Image(systemName: "gearshape")
