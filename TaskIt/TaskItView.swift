@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TaskItView: View {
-    @State private var date = Date()
-    @State private var add = false
+    @State private var CurrentDate = Date()
+    @State private var addTask = false
     
   
     
@@ -18,7 +18,7 @@ struct TaskItView: View {
     @AppStorage("ColorM") var ColorM: Color = .orange
     @AppStorage("ColorY") var ColorY: Color = .blue
     
-    @Environment(\.managedObjectContext) var top
+    @Environment(\.managedObjectContext) var CoreModel
     @FetchRequest(sortDescriptors: []) var CoreArr: FetchedResults<Task>
     
     //fix color rectangle
@@ -30,14 +30,13 @@ struct TaskItView: View {
         NavigationView{
             VStack {
                 VStack{
-                    DatePicker("Start of you day", selection: $date, displayedComponents: .date)
-                        .datePickerStyle(GraphicalDatePickerStyle()) 
+                    DatePicker("Start of you day", selection: $CurrentDate, displayedComponents: .date)
+                        .datePickerStyle(GraphicalDatePickerStyle())
                         .frame(maxHeight: 400)
                         .onAppear(){
                             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]){ success, error in
                                 if success{
                                     print("All set")
-                                    
                                 }
                                 else if error != nil{
                                     print("Broke")
@@ -53,7 +52,7 @@ struct TaskItView: View {
                       Section("Tasks will be show here"){
                           List{
                           ForEach(CoreArr){ hello in
-                              if (hello.start ?? Date() < date) {
+                              if (hello.startdate ?? Date() < CurrentDate) {
                                   NavigationLink{
                                       TaskView(item: hello)                            }label: {
                                           VStack{
@@ -65,34 +64,34 @@ struct TaskItView: View {
                                                       .overlay {
                                                           Rectangle()
                                                               .rotation(.degrees(-90))
-                                                              .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                              .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                               .position(x: -16,y: 5)
                                                           Rectangle()
                                                               .rotation(.degrees(-90))
-                                                              .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                              .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                               .position(x: -16,y: 13)
                                                       }
-                                                  Text(ty(One: Int(hello.cais)))
+                                                  Text(TypeToWords(Number: Int(hello.remindType)))
                                                       .font(.system(size: 10))
-                                                      .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                      .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                               }
                                               HStack{
-                                                  Text(hello.body ?? "Error Loading")
+                                                  Text(hello.aboutTask ?? "Error Loading")
                                                       .frame(maxWidth: .infinity, alignment: .leading)
                                                       .font(.system(size: 10))
                                                       .foregroundColor(.gray)
                                                       .overlay {
                                                           Rectangle()
                                                               .rotation(.degrees(-90))
-                                                              .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                              .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                               .position(x: -16,y: 5)
                                                           Rectangle()
                                                               .rotation(.degrees(-90))
-                                                              .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                              .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                               .position(x: -16,y: 13)
                                                       }
                                                   
-                                                  Text(hello.start ?? Date.now, style: .date)
+                                                  Text(hello.startdate ?? Date.now, style: .date)
                                                       .font(.system(size: 10))
                                                       .foregroundColor(.gray)
                                                   
@@ -105,8 +104,8 @@ struct TaskItView: View {
                                   
                                       .swipeActions(edge: .trailing){
                                           Button(role: .destructive){
-                                              top.delete(hello)
-                                              try? top.save()
+                                              CoreModel.delete(hello)
+                                              try? CoreModel.save()
                                           } label: {
                                               Image(systemName: "trash")
                                           }
@@ -120,11 +119,11 @@ struct TaskItView: View {
                                       }
                                       .swipeActions(edge: .leading){
                                           Button(){
-                                              hello.done.toggle()
-                                              try? top.save()
+                                              hello.completed.toggle()
+                                              try? CoreModel.save()
                                           }label:{
                                               
-                                              if hello.done == false {
+                                              if hello.completed == false {
                                                   Label("Finish", systemImage: "checkmark")
                                               }
                                               else {
@@ -162,18 +161,18 @@ struct TaskItView: View {
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button(){
-                        add.toggle()
+                        addTask.toggle()
                     } label: {
                         Image(systemName: "plus")
                     }
-                    .sheet(isPresented: $add){
+                    .sheet(isPresented: $addTask){
                         AddTask()
                     }
                 }
 
                 ToolbarItem(placement: .bottomBar){
                     NavigationLink{
-                        EditTaskView()
+                        AllTaskView()
                             .navigationTitle("All Tasks")
                         
                     } label: {
@@ -201,38 +200,38 @@ struct TaskItView: View {
         }
     }
  
-    func ty(One: Int) -> String{
+    func TypeToWords(Number: Int) -> String{
         var hi = ""
-        if (One == 1){
+        if (Number == 1){
          hi = "DAILY"
         }
-        else if (One == 2){
+        else if (Number == 2){
             hi = "WEEKLY"
             
         }
-        else if (One == 3){
+        else if (Number == 3){
            hi = "MONTHLY"
             
         }
-        else if (One == 4){
+        else if (Number == 4){
             hi = "YEARLY"
             
         }
     return hi
     }
     
-    func Colors(Num: Int) -> Color{
+    func TypeToColors(Number: Int) -> Color{
         var col = Color.gray
-        if (Num == 1){
+        if (Number == 1){
             col = ColorD
         }
-        else if (Num == 2){
+        else if (Number == 2){
             col = ColorW
         }
-        else  if (Num == 3){
+        else  if (Number == 3){
             col = ColorM
         }
-        else  if (Num == 4){
+        else  if (Number == 4){
             col = ColorY
         }
         else{

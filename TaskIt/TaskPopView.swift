@@ -9,18 +9,18 @@ import Foundation
 import SwiftUI
 
 struct TaskPopView: View  {
-    @Environment(\.managedObjectContext) var top
+    @Environment(\.managedObjectContext) var CoreModel
     
     @AppStorage("ColorD") var ColorD: Color = .green
     @AppStorage("ColorW") var ColorW: Color = .red
     @AppStorage("ColorM") var ColorM: Color = .orange
     @AppStorage("ColorY") var ColorY: Color = .blue
     
-   @State var tittle = ""
-   @State var bod = ""
-   @State var type = 0
-   @State var done = false
-   @State var rtype = 0
+   @State var defaultTitle = ""
+   @State var defaulDescription = ""
+   @State var defaultType = 0
+   @State var defaulCompleted = false
+   @State var boundType = 0
    
    @Environment(\.dismiss) var dismiss
     
@@ -33,7 +33,7 @@ struct TaskPopView: View  {
         NavigationView{
         Form{
             Section{
-                TextField("Tittle", text: $tittle)
+                TextField("Tittle", text: $defaultTitle)
                     .overlay {
                         Rectangle()
                             .rotation(.degrees(-90))
@@ -45,10 +45,10 @@ struct TaskPopView: View  {
                             .position(x: -16,y: 13)
                     }
                     .onAppear(){
-                        typeF()
+                        defaultFiller()
                     }
                 
-                TextField("Notes", text: $bod)
+                TextField("Notes", text: $defaulDescription)
                     .overlay {
                         Rectangle()
                             .rotation(.degrees(-90))
@@ -63,30 +63,30 @@ struct TaskPopView: View  {
             }
             Section{
                 HStack{
-                    Picker("Change reminder type", selection: $rtype){
+                    Picker("Change reminder type", selection: $boundType){
                         ForEach(1..<5){
-                            Text(ty(One: $0))
+                            Text(TypeToWords(Number: $0))
                         }
                     }
                     .tint(.blue)
                     .onAppear(){
-                        typeF()
+                        defaultFiller()
                     }
                 }
             }
             Section{
                 HStack{
-                    Text(done ? "Completed" : "Not Completed")
-                        .foregroundColor(done ? Color.green : Color.red)
+                    Text(defaulCompleted ? "Completed" : "Not Completed")
+                        .foregroundColor(defaulCompleted ? Color.green : Color.red)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     
                     Button{
-                        done.toggle()
-                        item.done = done
-                        try? top.save()
+                        defaulCompleted.toggle()
+                        item.completed = defaulCompleted
+                        try? CoreModel.save()
                     } label: {
-                        Image(systemName: done ? "checkmark.square" : "square")
+                        Image(systemName: defaulCompleted ? "checkmark.square" : "square")
                             .foregroundColor(Color.black)
                     }
                     
@@ -100,10 +100,10 @@ struct TaskPopView: View  {
             
             ToolbarItem(placement: .navigationBarTrailing){
                 Button(){
-                    item.title = tittle
-                    item.body = bod
-                    item.cais = Int16(rtype+1)
-                    try? top.save()
+                    item.title = defaultTitle
+                    item.aboutTask = defaulDescription
+                    item.remindType = Int16(boundType+1)
+                    try? CoreModel.save()
                     dismiss()
                 } label: {
                     Text("Done")
@@ -128,22 +128,22 @@ struct TaskPopView: View  {
     }
         }
     
-    func typeF(){
-        type = Int(item.cais)
-        rtype = type-1
-        tittle = item.title ?? "Error"
-        bod = item.body ?? "Error"
-        done = item.done
-        if (type == 1){
+    func defaultFiller(){
+        defaultType = Int(item.remindType)
+        boundType = defaultType-1
+        defaultTitle = item.title ?? "Error"
+        defaulDescription = item.aboutTask ?? "Error"
+        defaulCompleted = item.completed
+        if (defaultType == 1){
          color = ColorD
         }
-        else if (type == 2){
+        else if (defaultType == 2){
             color = ColorW
         }
-       else  if (type == 3){
+       else  if (defaultType == 3){
            color = ColorM
         }
-        else  if (type == 4){
+        else  if (defaultType == 4){
             color = ColorY
          }
         else{
@@ -151,20 +151,20 @@ struct TaskPopView: View  {
         }
         
     }
-    func ty(One: Int) -> String{
+    func TypeToWords(Number: Int) -> String{
         var hi = ""
-        if (One == 1){
+        if (Number == 1){
          hi = "Dayly"
         }
-        else if (One == 2){
+        else if (Number == 2){
             hi = "Weekly"
             
         }
-        else if (One == 3){
+        else if (Number == 3){
            hi = "Monthly"
             
         }
-        else if (One == 4){
+        else if (Number == 4){
             hi = "Yearly"
             
         }

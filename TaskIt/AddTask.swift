@@ -10,49 +10,54 @@ import Foundation
 import SwiftUI
 
 struct AddTask: View {
-    @Environment(\.managedObjectContext) var top
+    @Environment(\.managedObjectContext) var CoreModel
     @FetchRequest(sortDescriptors: []) var CoreArr: FetchedResults<Task>
-    @State var tittle1 = ""
-    @State var bodie1 = ""
-    @State var rtype = 0
-    @State var Start = Date()
+    @State var defaultTitle = ""
+    @State var defaultDescription = ""
+    @State var defaultType = 0
+    @State var defaultStart = Date()
+    @State var descritption = "descritption"
     @Environment(\.dismiss) var dismiss
     var body: some View {
         NavigationView{
             Form{
                 Section {
                     
-                    TextField("Task Name", text: $tittle1)
-                    TextField("Description", text: $bodie1)
+                    TextField("Task Name", text: $defaultTitle)
+                    TextField("Description", text: $defaultDescription)
                 }
                 Section {
-                    DatePicker("Starts ", selection: $Start, displayedComponents: [.date, .hourAndMinute])
+                    DatePicker("Starts ", selection: $defaultStart, displayedComponents: [.date, .hourAndMinute])
                 }
-                    Section{
+                Section{
                     
-                        Picker("Frequency", selection: $rtype){
-                            ForEach(1..<5){
-                                Text(ty(One: $0))
-                            }
+                    Picker("Frequency", selection: $defaultType){
+                        ForEach(1..<5){
+                            Text(TypeToWords(Number: $0))
                         }
-                        .tint(.blue)
+                        .onReceive([self.defaultType].publisher.first()) { Hello in
+                            descritptionFiller(Number: Hello+1)
+                         }
+                    }
                     
-                    //Add descrition of each type of reminder
+                    .tint(.blue)
+                    Text(descritption)
                     
                 }
+               
             }
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button(){
-                        if(tittle1 != ""){
-                            let hello = Task(context: top)
+                        if(defaultTitle != ""){
+                            let hello = Task(context: CoreModel)
                             hello.id = UUID()
-                            hello.title = tittle1
-                            hello.body = bodie1
-                            hello.done = false
-                            hello.start = Start
-                            hello.cais = Int16(rtype+1)
-                            try? top.save()
+                            hello.title = defaultTitle
+                            hello.aboutTask = defaultDescription
+                            hello.completed = false
+                            hello.startdate = defaultStart
+                            hello.remindType = Int16(defaultType+1)
+                            try? CoreModel.save()
                             dismiss()
                         }
                     } label: {
@@ -74,20 +79,41 @@ struct AddTask: View {
         
         }
     }
-    func ty(One: Int) -> String{
+    
+    func descritptionFiller(Number: Int){
+        
+        if (Number == 1){
+            descritption = "A daily reminder type notifies you every 50th minute of the hour until you complete it. At the end of the day if you have not completed the task it will be moved to the next day."
+        }
+        else if (Number == 2){
+            descritption = "A weekly reminder type notifies you once every day for a week. Once you hit the last day of the week, it'll turn into a daily task."
+            
+        }
+        else if (Number == 3){
+            descritption = "A monthly task will notify you once a week for a month. When you hit the last week of the month it'll turn into a weekly task."
+            
+        }
+        else if (Number == 4){
+            descritption = "A yearly task will notify you once a month. When you hit the last month of the year it'll turn into a monthly task."
+            
+        }
+        
+    }
+    
+    func TypeToWords(Number: Int) -> String{
         var hi = ""
-        if (One == 1){
+        if (Number == 1){
          hi = "Daily"
         }
-        else if (One == 2){
+        else if (Number == 2){
             hi = "Weekly"
             
         }
-        else if (One == 3){
+        else if (Number == 3){
            hi = "Monthly"
             
         }
-        else if (One == 4){
+        else if (Number == 4){
             hi = "Yearly"
             
         }

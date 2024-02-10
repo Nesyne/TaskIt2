@@ -10,81 +10,81 @@ import Foundation
 import SwiftUI
 
 struct TaskView: View  {
-    @Environment(\.managedObjectContext) var top
+    @Environment(\.managedObjectContext) var CoreModel
     
     @AppStorage("ColorD") var ColorD: Color = .green
     @AppStorage("ColorW") var ColorW: Color = .red
     @AppStorage("ColorM") var ColorM: Color = .orange
     @AppStorage("ColorY") var ColorY: Color = .blue
     
-   @State var tittle = ""
-   @State var bod = ""
-   @State var type = 0
-   @State var done = false
-   @State var rtype = 0
+   @State var defaultTitle = ""
+   @State var defaultDescription = ""
+   @State var boundType = 0
+   @State var defaulCompleted = false
+   @State var defaultType = 0
    
    @State var item : Task
  
    @State var editting = false
     
-   @State var color = Color.green
+   @State var defaultColor = Color.green
     var body: some View {
-       //make box on the right side of the bar
+      
         
         Form{
             Section{
                 if editting {
-               TextField("Tittle", text: $tittle)
+               TextField("Tittle", text: $defaultTitle)
                         .overlay {
                             Rectangle()
                                 .rotation(.degrees(-90))
-                                .foregroundColor(color)
+                                .foregroundColor(defaultColor)
                                 .position(x: -16,y: 5)
                             Rectangle()
                                 .rotation(.degrees(-90))
-                                .foregroundColor(color)
+                                .foregroundColor(defaultColor)
                                 .position(x: -16,y: 13)
                         }
                         .onAppear(){
-                            typeF()
+                            defaultFiller()
                         }
                     
-                    TextField("Notes", text: $bod)
+                    TextField("Notes", text: $defaultDescription)
                         .overlay {
                         Rectangle()
                             .rotation(.degrees(-90))
-                            .foregroundColor(color)
+                            .foregroundColor(defaultColor)
                             .position(x: -16,y: 5)
                         Rectangle()
                             .rotation(.degrees(-90))
-                            .foregroundColor(color)
+                            .foregroundColor(defaultColor)
                             .position(x: -16,y: 13)
                     }
                     
                     }
                     else{
-                        Text(tittle).overlay {
+                        Text(defaultTitle).overlay {
                             Rectangle()
                                 .rotation(.degrees(-90))
-                                .foregroundColor(color)
+                                .foregroundColor(defaultColor)
                                 .position(x: -16,y: 5)
                             Rectangle()
                                 .rotation(.degrees(-90))
-                                .foregroundColor(color)
+                                .foregroundColor(defaultColor)
                                 .position(x: -16,y: 13)
                         }
                         .onAppear(){
-                            typeF()
+                            defaultFiller()
                     }
                
-                        Text(bod).overlay {
+                        Text(defaultDescription).overlay {
                             Rectangle()
                                 .rotation(.degrees(-90))
-                                .foregroundColor(color)
+                                .foregroundColor(defaultColor)
                                 .position(x: -16,y: 5)
                             Rectangle()
                                 .rotation(.degrees(-90))
-                                .foregroundColor(color)
+                                .foregroundColor(defaultColor)
                                 .position(x: -16,y: 13)
                         }
 
@@ -96,14 +96,14 @@ struct TaskView: View  {
                
                     if editting == true {
                         HStack{
-                        Picker("Change reminder type", selection: $rtype){
+                        Picker("Change reminder type", selection: $defaultType){
                             ForEach(1..<5){
-                                Text(ty(One: $0))
+                                Text(TypeToWords(Number: $0))
                             }
                         }
                         .tint(.blue)
                         .onAppear(){
-                            typeF()
+                            defaultFiller()
                         }
                     }
                     
@@ -111,17 +111,17 @@ struct TaskView: View  {
             }
             Section{
                 HStack{
-                    Text(done ? "Completed" : "Not Completed")
-                        .foregroundColor(done ? Color.green : Color.red)
+                    Text(defaulCompleted ? "Completed" : "Not Completed")
+                        .foregroundColor(defaulCompleted ? Color.green : Color.red)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     
                     Button{
-                        done.toggle()
-                        item.done = done
-                        try? top.save()
+                        defaulCompleted.toggle()
+                        item.completed = defaulCompleted
+                        try? CoreModel.save()
                     } label: {
-                        Image(systemName: done ? "checkmark.square" : "square")
+                        Image(systemName: defaulCompleted ? "checkmark.square" : "square")
                             .foregroundColor(Color.black)
                     }
                    
@@ -136,10 +136,10 @@ struct TaskView: View  {
             ToolbarItem(placement: .navigationBarTrailing){
                 Button(){
                     editting.toggle()
-                    item.title = tittle
-                    item.body = bod
-                    item.cais = Int16(rtype+1)
-                    try? top.save()
+                    item.title = defaultTitle
+                    item.aboutTask = defaultDescription
+                    item.remindType = Int16(defaultType+1)
+                    try? CoreModel.save()
                 } label: {
                     if editting {
                         Text("Done")
@@ -156,43 +156,43 @@ struct TaskView: View  {
         
         }
     
-    func typeF(){
-        type = Int(item.cais)
-        rtype = type-1
-        tittle = item.title ?? "Error"
-        bod = item.body ?? "Error"
-        done = item.done
-        if (type == 1){
-         color = ColorD
+    func defaultFiller(){
+        boundType = Int(item.remindType)
+        defaultType = boundType-1
+        defaultTitle = item.title ?? "Error"
+        defaultDescription = item.aboutTask ?? "Error"
+        defaulCompleted = item.completed
+        if (boundType == 1){
+         defaultColor = ColorD
         }
-        else if (type == 2){
-            color = ColorW
+        else if (boundType == 2){
+            defaultColor = ColorW
         }
-       else  if (type == 3){
-           color = ColorM
+       else  if (boundType == 3){
+           defaultColor = ColorM
         }
-        else  if (type == 4){
-            color = ColorY
+        else  if (boundType == 4){
+            defaultColor = ColorY
          }
         else{
          //error handling
         }
         
     }
-    func ty(One: Int) -> String{
+    func TypeToWords(Number: Int) -> String{
         var hi = ""
-        if (One == 1){
+        if (Number == 1){
          hi = "Dayly"
         }
-        else if (One == 2){
+        else if (Number == 2){
             hi = "Weekly"
             
         }
-        else if (One == 3){
+        else if (Number == 3){
            hi = "Monthly"
             
         }
-        else if (One == 4){
+        else if (Number == 4){
             hi = "Yearly"
             
         }

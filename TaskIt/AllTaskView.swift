@@ -44,11 +44,11 @@ struct AllTaskView: View {
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                                 .foregroundColor(.black)
@@ -60,11 +60,11 @@ struct AllTaskView: View {
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                             
@@ -131,11 +131,11 @@ struct AllTaskView: View {
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                                 .foregroundColor(.black)
@@ -147,11 +147,11 @@ struct AllTaskView: View {
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                             
@@ -213,11 +213,11 @@ struct AllTaskView: View {
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                                 .foregroundColor(.black)
@@ -229,11 +229,11 @@ struct AllTaskView: View {
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                             
@@ -295,11 +295,11 @@ struct AllTaskView: View {
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                                 .foregroundColor(.black)
@@ -311,11 +311,11 @@ struct AllTaskView: View {
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
+                                                        .foregroundColor(TypeToColors(Number: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                             
@@ -368,29 +368,19 @@ struct AllTaskView: View {
         
     }
     
-    func dellt(at offset: IndexSet){
-        for offset in offset{
-        let no = CoreArr[offset]
-            CoreModel.delete(no)
-        }
-        try? CoreModel.save()
-        
-       
-        
-    }
     
-    func Colors(Num: Int) -> Color{
+    func TypeToColors(Number: Int) -> Color{
         var col = Color.gray
-        if (Num == 1){
+        if (Number == 1){
             col = ColorD
         }
-        else if (Num == 2){
+        else if (Number == 2){
             col = ColorW
         }
-        else  if (Num == 3){
+        else  if (Number == 3){
             col = ColorM
         }
-        else  if (Num == 4){
+        else  if (Number == 4){
             col = ColorY
         }
         else{

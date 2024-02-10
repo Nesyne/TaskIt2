@@ -15,23 +15,23 @@ struct SettingView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @State var dateS = Date()
-    @State var dateD = Date()
-    @State var dateDW = Date()
-    @State var day = 0
+    @State var startDay = Date()
+    @State var endDay = Date()
+    @State var timeReminder = Date()
+    @State var dayReminder = 0
     var body: some View {
         NavigationView{
             Form {
-                // Take away save buttons
+          
                 //make subs sections for each type of reminder and set days/time if needed
                 // make the start higher
                 Section(header: Text("Day start and end times")){
-                    DatePicker("Starts", selection: $dateS, displayedComponents: .hourAndMinute)
+                    DatePicker("Starts", selection: $startDay, displayedComponents: .hourAndMinute)
                         .onAppear(){
                            load()
                         }
                     
-                    DatePicker("Ends", selection: $dateD, displayedComponents: .hourAndMinute)
+                    DatePicker("Ends", selection: $endDay, displayedComponents: .hourAndMinute)
                         .onAppear(){
                            load()
                         }
@@ -40,11 +40,11 @@ struct SettingView: View {
                     
                 }
                 Section(header: Text("Notification Times")){
-                    DatePicker("Non-daily notifications are sent at", selection: $dateDW, displayedComponents: .hourAndMinute)
+                    DatePicker("Non-daily notifications are sent at", selection: $timeReminder, displayedComponents: .hourAndMinute)
                         .onAppear(){
                             load()
                         }
-                    Picker("Non-daily/weekly notifications will be sent on", selection: $day){
+                    Picker("Non-daily/weekly notifications will be sent on", selection: $dayReminder){
                         ForEach(0..<7){
                             Text(type(num: $0))
                         }
@@ -104,23 +104,23 @@ struct SettingView: View {
     }
    
     func save(){
-        UserDefaults.standard.set(dateS, forKey: "SDay")
-        UserDefaults.standard.set(dateD, forKey: "EDay")
+        UserDefaults.standard.set(startDay, forKey: "SDay")
+        UserDefaults.standard.set(endDay, forKey: "EDay")
         
-        UserDefaults.standard.set(dateDW, forKey: "NTime")
-        UserDefaults.standard.set(day, forKey: "Month")
+        UserDefaults.standard.set(timeReminder, forKey: "NTime")
+        UserDefaults.standard.set(dayReminder, forKey: "Month")
         
     }
     
     func load() {
         if (UserDefaults.standard.object(forKey: "SDay") != nil){
-            dateS = UserDefaults.standard.object(forKey: "SDay") as! Date
+            startDay = UserDefaults.standard.object(forKey: "SDay") as! Date
         }
         else{
             UserDefaults.standard.set(Date(), forKey: "SDay")
         }
         if (UserDefaults.standard.object(forKey: "EDay") != nil){
-            dateD = UserDefaults.standard.object(forKey: "EDay") as! Date
+            endDay = UserDefaults.standard.object(forKey: "EDay") as! Date
         }
         else{
             UserDefaults.standard.set(Date(), forKey: "EDay")
@@ -129,13 +129,13 @@ struct SettingView: View {
         
         
         if (UserDefaults.standard.object(forKey: "NTime") != nil){
-            dateDW = UserDefaults.standard.object(forKey: "NTime") as! Date
+            timeReminder = UserDefaults.standard.object(forKey: "NTime") as! Date
         }
         else{
             UserDefaults.standard.set(Date(), forKey: "NTime")
         }
         if (UserDefaults.standard.object(forKey: "Month") != nil){
-            day = UserDefaults.standard.object(forKey: "Month") as! Int
+            dayReminder = UserDefaults.standard.object(forKey: "Month") as! Int
         }
         else{
             UserDefaults.standard.set(0, forKey: "Month")

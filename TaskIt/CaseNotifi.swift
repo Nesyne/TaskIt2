@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 class CaseNotifi {
-    @Environment(\.managedObjectContext) var top
+    @Environment(\.managedObjectContext) var CoreModel
     @FetchRequest(sortDescriptors: []) var CoreArr: FetchedResults<Task>
     @State var todaysDate = Date()
      @State var dateFormatter = DateFormatter()
@@ -18,20 +18,20 @@ class CaseNotifi {
         dateInFormat = dateFormatter.string(from: todaysDate)
        
         ForEach(CoreArr){ hello in
-            if(hello.done == false){
-                if(hello.cais == 1){
+            if(hello.completed == false){
+                if(hello.remindType == 1){
                     if(self.dateInFormat.components(separatedBy: ":").last ?? "ERROR" == "50"){
                         //noti.no(Tittle1: hello.title ?? "Error", Body: hello.body ?? "Error", Start: Date.now)
                         Text("hello")
                     }
                 }
-                else if(hello.cais == 2){
+                else if(hello.remindType == 2){
                     
                 }
-                else if(hello.cais == 3){
+                else if(hello.remindType == 3){
                     
                 }
-                else if(hello.cais == 4){
+                else if(hello.remindType == 4){
                     
                 }
             }
