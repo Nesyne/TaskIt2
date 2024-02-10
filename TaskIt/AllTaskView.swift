@@ -7,13 +7,13 @@
 
 import SwiftUI
 // AllTaskView
-struct EditTaskView: View {
+struct AllTaskView: View {
     @AppStorage("ColorD") var ColorD: Color = .green
     @AppStorage("ColorW") var ColorW: Color = .red
     @AppStorage("ColorM") var ColorM: Color = .orange
     @AppStorage("ColorY") var ColorY: Color = .blue
     
-    @Environment(\.managedObjectContext) var top
+    @Environment(\.managedObjectContext) var CoreModel
     @FetchRequest(sortDescriptors: []) var CoreArr: FetchedResults<Task>
     
     @State var Popup1 = false
@@ -21,10 +21,10 @@ struct EditTaskView: View {
     @State var Popup3 = false
     @State var Popup4 = false
     
-    //Change tittle to header
+   
     //Hide section tittle when there are no tasks
     
-    // make tasks pop-up view, go straight to edit and have a save and cancel at the top
+    // make pop-up work for each in list
     
     
     
@@ -32,7 +32,7 @@ struct EditTaskView: View {
             Form{
                 Section("Daily Reminders"){
                     ForEach(CoreArr){ hello in
-                        if (hello.cais == 1) {
+                        if (hello.remindType == 1) {
                             Button(){
                                 Popup1.toggle()                            }label: {
                                     HStack{
@@ -44,27 +44,27 @@ struct EditTaskView: View {
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                                 .foregroundColor(.black)
                                             
-                                            Text(hello.body ?? "Error Loading")
+                                            Text(hello.aboutTask ?? "Error Loading")
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .font(.system(size: 10))
                                                 .foregroundColor(.gray)
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                             
@@ -81,8 +81,8 @@ struct EditTaskView: View {
 
                                 .swipeActions(edge: .trailing){
                                     Button(role: .destructive){
-                                        top.delete(hello)
-                                        try? top.save()
+                                        CoreModel.delete(hello)
+                                        try? CoreModel.save()
                                     } label: {
                                      Image(systemName: "trash")
                                     }
@@ -96,11 +96,11 @@ struct EditTaskView: View {
                                 }
                                 .swipeActions(edge: .leading){
                                     Button(){
-                                        hello.done.toggle()
-                                        try? top.save()
+                                        hello.completed.toggle()
+                                        try? CoreModel.save()
                                     }label:{
                                         
-                                        if hello.done == false {
+                                        if hello.completed == false {
                                             Label("Finish", systemImage: "checkmark")
                                         }
                                         else {
@@ -119,7 +119,7 @@ struct EditTaskView: View {
                 }
                 Section("Weekly Reminders"){
                     ForEach(CoreArr){ hello in
-                        if (hello.cais == 2) {
+                        if (hello.remindType == 2) {
                             Button(){
                                 Popup2.toggle()                            }label: {
                                     HStack{
@@ -131,27 +131,27 @@ struct EditTaskView: View {
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                                 .foregroundColor(.black)
                                             
-                                            Text(hello.body ?? "Error Loading")
+                                            Text(hello.aboutTask ?? "Error Loading")
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .font(.system(size: 10))
                                                 .foregroundColor(.gray)
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                             
@@ -165,8 +165,8 @@ struct EditTaskView: View {
                                 }
                                 .swipeActions(edge: .trailing){
                                     Button(role: .destructive){
-                                        top.delete(hello)
-                                        try? top.save()
+                                        CoreModel.delete(hello)
+                                        try? CoreModel.save()
                                     } label: {
                                      Image(systemName: "trash")
                                     }
@@ -180,11 +180,11 @@ struct EditTaskView: View {
                                 }
                                 .swipeActions(edge: .leading){
                                     Button(){
-                                        hello.done.toggle()
-                                        try? top.save()
+                                        hello.completed.toggle()
+                                        try? CoreModel.save()
                                     }label:{
                                         
-                                        if hello.done == false {
+                                        if hello.completed == false {
                                             Label("Finish", systemImage: "checkmark")
                                         }
                                         else {
@@ -201,7 +201,7 @@ struct EditTaskView: View {
                 }
                 Section("Monthly Reminders"){
                     ForEach(CoreArr){ hello in
-                        if (hello.cais == 3) {
+                        if (hello.remindType == 3) {
                             Button(){
                                 Popup3.toggle()                            }label: {
                                     HStack{
@@ -213,27 +213,27 @@ struct EditTaskView: View {
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                                 .foregroundColor(.black)
                                             
-                                            Text(hello.body ?? "Error Loading")
+                                            Text(hello.aboutTask ?? "Error Loading")
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .font(.system(size: 10))
                                                 .foregroundColor(.gray)
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                             
@@ -247,8 +247,8 @@ struct EditTaskView: View {
                             }
                                 .swipeActions(edge: .trailing){
                                     Button(role: .destructive){
-                                        top.delete(hello)
-                                        try? top.save()
+                                        CoreModel.delete(hello)
+                                        try? CoreModel.save()
                                     } label: {
                                      Image(systemName: "trash")
                                     }
@@ -262,11 +262,11 @@ struct EditTaskView: View {
                                 }
                                 .swipeActions(edge: .leading){
                                     Button(){
-                                        hello.done.toggle()
-                                        try? top.save()
+                                        hello.completed.toggle()
+                                        try? CoreModel.save()
                                     }label:{
                                         
-                                        if hello.done == false {
+                                        if hello.completed == false {
                                             Label("Finish", systemImage: "checkmark")
                                         }
                                         else {
@@ -283,7 +283,7 @@ struct EditTaskView: View {
                 }
                 Section("Yearly Reminders"){
                     ForEach(CoreArr){ hello in
-                        if (hello.cais == 4) {
+                        if (hello.remindType == 4) {
                             Button(){
                                 Popup4.toggle()                            }label: {
                                     HStack{
@@ -295,27 +295,27 @@ struct EditTaskView: View {
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                                 .foregroundColor(.black)
                                             
-                                            Text(hello.body ?? "Error Loading")
+                                            Text(hello.aboutTask ?? "Error Loading")
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .font(.system(size: 10))
                                                 .foregroundColor(.gray)
                                                 .overlay {
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 5)
                                                     Rectangle()
                                                         .rotation(.degrees(-90))
-                                                        .foregroundColor(Colors(Num: Int((hello.cais))))
+                                                        .foregroundColor(Colors(Num: Int((hello.remindType))))
                                                         .position(x: -16,y: 13)
                                                 }
                                             
@@ -329,8 +329,8 @@ struct EditTaskView: View {
                                 }
                                 .swipeActions(edge: .trailing){
                                     Button(role: .destructive){
-                                        top.delete(hello)
-                                        try? top.save()
+                                        CoreModel.delete(hello)
+                                        try? CoreModel.save()
                                     } label: {
                                      Image(systemName: "trash")
                                     }
@@ -344,11 +344,11 @@ struct EditTaskView: View {
                                 }
                                 .swipeActions(edge: .leading){
                                     Button(){
-                                        hello.done.toggle()
-                                        try? top.save()
+                                        hello.completed.toggle()
+                                        try? CoreModel.save()
                                     }label:{
                                         
-                                        if hello.done == false {
+                                        if hello.completed == false {
                                             Label("Finish", systemImage: "checkmark")
                                         }
                                         else {
@@ -371,9 +371,9 @@ struct EditTaskView: View {
     func dellt(at offset: IndexSet){
         for offset in offset{
         let no = CoreArr[offset]
-            top.delete(no)
+            CoreModel.delete(no)
         }
-        try? top.save()
+        try? CoreModel.save()
         
        
         
@@ -402,6 +402,6 @@ struct EditTaskView: View {
 
 struct EditTaskView_Previews: PreviewProvider {
     static var previews: some View {
-        EditTaskView()
+        AllTaskView()
     }
 }
