@@ -25,7 +25,7 @@ struct TaskView: View  {
    
    @State var item : Task
  
-   @State var editting = false
+    @State var editting : Bool
     
    @State var defaultColor = Color.green
     var body: some View {

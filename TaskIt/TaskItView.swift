@@ -54,7 +54,8 @@ struct TaskItView: View {
                           ForEach(CoreArr){ hello in
                               if (hello.startdate ?? Date() < CurrentDate) {
                                   NavigationLink{
-                                      TaskView(item: hello)                            }label: {
+                                      TaskView(item: hello, editting: false)
+                                  }label: {
                                           VStack{
                                               HStack{
                                                   
@@ -111,7 +112,7 @@ struct TaskItView: View {
                                           }
                                           
                                           Button(){
-                                              
+                                             // TaskView(item: hello, editting: true)
                                           }label:{
                                               Label("Edit", systemImage: "pencil.circle.fill")
                                           }
@@ -149,11 +150,8 @@ struct TaskItView: View {
                 //Todo: wrap this into an if statement for when to show or not based on whether there are calendar events
                 
             // Optionally: based on the date; get the task and it's type(daily, weekly etc)
-                //Maybe make a listview view here and display the name of the task on the left(and maybe descriptions underneath) and then to right, display the type
                 
-            // When you swipe the record on the list(task) to the left, you can select Edit to go to edit window,or select complete to mark it complete or you can delete the task.
                 
-                //Clicking the task takes you to the Task Details view. Here you can mark the task as complete or delete. On the top right of this view, should be an Edit button. When clicked, it will open another Edit view.
                 
             }
             .padding()
